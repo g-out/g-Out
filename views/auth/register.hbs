@@ -1,0 +1,14 @@
+<div class="container mt-5">
+  <div class="row justify-content-md-center">
+    <div class="col-xs-12 col-sm-12 col-md-4">
+      <form action="/register" method="POST">
+        {{>user/profile user=user errors=errors}}
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </div>
+      </form>
+      <hr>
+      <p class="text-center">Already registered? <a href="/login">Do login</a></p>
+    </div>
+  </div>
+</div>

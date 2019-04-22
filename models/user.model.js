@@ -26,11 +26,11 @@ const userSchema = new mongoose.Schema({
   likes: [
     {
       food: {
-        type: String,
+        type: [String],
         num: ["Asiatica", "Española", "Italiana", "Moderna"]
       },
       music: {
-        type: String,
+        type: [String],
         num: ["techno", "house", "pop", "salsa", "rock", "reggaeton", "funky"]
       },
     }

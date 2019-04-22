@@ -1,4 +1,4 @@
-// AVATAR configuración
+// AVATAR configuración bsfdgxfdh
 
 const cloudinary = require('cloudinary');
 const cloudinaryStorage = require('multer-storage-cloudinary');

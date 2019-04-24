@@ -36,9 +36,9 @@ app.use((req, res, next) => {
   res.locals.session = req.user;
   next();
 })
-
+*/
 app.use('/', authRouter);
- */
+ 
 
 
 // catch 404 and forward to error handler

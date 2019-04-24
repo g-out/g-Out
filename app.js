@@ -4,16 +4,16 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-//const logger = require('morgan');
+const logger = require('morgan');
 //const passport = require('passport');
 
 require('./config/db.config');
-//require('./config/hbs.config');
+require('./config/hbs.config');
 //const session = require('./config/session.config');
 //require('./config/passport.config');
 
 // Esto lo tenemos que hacer nosotros desde aqui
-const authRouter = require('./routes/plantilla.router');
+const authRouter = require('./routes/auth.router');
 
 const app = express();
 
@@ -36,9 +36,14 @@ app.use((req, res, next) => {
   res.locals.session = req.user;
   next();
 })
+<<<<<<< HEAD
 */
 app.use('/', authRouter);
  
+=======
+ */
+app.use('/', authRouter);
+>>>>>>> ea15122e8650e4e89d33120f795bdb131d777c69
 
 
 // catch 404 and forward to error handler

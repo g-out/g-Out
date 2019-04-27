@@ -35,7 +35,12 @@ const userSchema = new mongoose.Schema({
       },
     }
   ],
-  avatarURL: String
+  social: {
+    googleId: {
+      type: String,
+      unique: true
+    }
+  },  avatarURL: String
 }, { timestamps: true })
 
 

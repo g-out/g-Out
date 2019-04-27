@@ -40,29 +40,12 @@ module.exports.doRegister = (req, res, next) => {
 };
 
 module.exports.login = (req, res, next) => {
-  res.render('auth/form', {
-    login: true
-  })
-}
-
-module.exports.doLogin = (req, res, next) => {
-  res.render('auth/form')
-}
-
-module.exports.logout = (req, res, next) => {
-  req.logout();
-  res.redirect('/login');
-}
-/*
-
-
-module.exports.login = (req, res, next) => {
-  res.render('auth/login');
+  res.render('auth/login')
 }
 
 module.exports.doLogin = (req, res, next) => {
   passport.authenticate('local-auth', (error, user, validation) => {
-    if (error) {
+    if(error) {
       next(error);
     } else if (!user) {
       res.render('auth/login', {
@@ -74,11 +57,11 @@ module.exports.doLogin = (req, res, next) => {
         if (error) {
           next(error)
         } else {
-          res.redirect('/profile')
+          res.redirect('/');
         }
       })
     }
-  })(req, res, next);
+  })(req, res, next)
 }
 
 module.exports.loginWithGoogleCallback = (req, res, next) => {
@@ -90,13 +73,20 @@ module.exports.loginWithGoogleCallback = (req, res, next) => {
         if (error) {
           next(error)
         } else {
-          res.redirect('/profile');
+          console.log(user)
+          res.redirect('/');
         }
       })
     }
   })(req, res, next);
 }
 
+module.exports.logout = (req, res, next) => {
+  req.logout();
+  res.redirect('/login');
+}
+
+/*
 module.exports.profile = (req, res, next) => {
   res.render('auth/profile')
 }

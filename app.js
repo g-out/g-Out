@@ -5,12 +5,12 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-//const passport = require('passport');
+const passport = require('passport');
 
 require('./config/db.config');
 require('./config/hbs.config');
 //const session = require('./config/session.config');
-//require('./config/passport.config');
+require('./config/passport.config');
 
 // Esto lo tenemos que hacer nosotros desde aqui
 const authRouter = require('./routes/auth.router');
@@ -26,10 +26,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-/* 
-app.use(session);
 app.use(passport.initialize());
 app.use(passport.session())
+/* 
+app.use(session);
+
 
 app.use((req, res, next) => {
   res.locals.path = req.path;

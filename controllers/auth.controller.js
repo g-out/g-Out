@@ -82,8 +82,6 @@ module.exports.loginWithGoogleCallback = (req, res, next) => {
 }
 module.exports.loginWithSpotifyCallback = (req, res, next) => {
   passport.authenticate(`spotify`, (error, user) => {
-
-    console.log(user)
     if (error) {
       next(error);
     } else {

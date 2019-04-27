@@ -77,14 +77,13 @@ passport.use('spotify', new SpotifyStrategy({
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
       callbackURL: process.env.SPOTIFY_SPOTIFY_CALLBACK_URL || '/auth/spotify/callback'
     }, (accessToken, refreshToken, expires_in, profile, next) => {
-      console.log(profile)
       const spotifyId = profile.id;
       const name = profile.displayName;
       const email = profile.emails ? profile.emails[0].value : undefined;
       const avatarURL = profile.photos[0];
       User.findOne({
         $or: [
-          { email: email },
+          { email },
           { 'social.spotifyId': spotifyId }
         ]
       })

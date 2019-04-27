@@ -28,5 +28,20 @@
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
-  }
+  },
+  "description": "## Introduction",
+  "main": "app.js",
+  "bin": {
+    "lab-ex-profile": "seeds.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/g-out/g-Out.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/g-out/g-Out/issues"
+  },
+  "homepage": "https://github.com/g-out/g-Out#readme"
 }

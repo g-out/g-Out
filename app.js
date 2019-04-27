@@ -37,8 +37,14 @@ app.use((req, res, next) => {
   res.locals.session = req.user;
   next();
 })
+<<<<<<< HEAD
+*/
+app.use('/', authRouter);
+ 
+=======
  */
 app.use('/', authRouter);
+>>>>>>> ea15122e8650e4e89d33120f795bdb131d777c69
 
 
 // catch 404 and forward to error handler

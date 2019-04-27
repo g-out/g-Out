@@ -80,6 +80,24 @@ module.exports.loginWithGoogleCallback = (req, res, next) => {
     }
   })(req, res, next);
 }
+module.exports.loginWithSpotifyCallback = (req, res, next) => {
+  passport.authenticate(`spotify`, (error, user) => {
+
+    console.log(user)
+    if (error) {
+      next(error);
+    } else {
+      req.login(user, (error) => {
+        if (error) {
+          next(error)
+        } else {
+          console.log(user)
+          res.redirect('/');
+        }
+      })
+    }
+  })(req, res, next);
+}
 
 module.exports.logout = (req, res, next) => {
   req.logout();

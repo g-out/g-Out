@@ -2,8 +2,8 @@ const User = require('../models/user.model');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
+const SpotifyStrategy = require('passport-spotify').Strategy;
 
-// Meter inicio sesion Spotify
 
 passport.serializeUser((user, next) => {
   next(null, user.id);
@@ -41,7 +41,6 @@ passport.use('google-auth', new GoogleStrategy({
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: process.env.GOOGLE_CALLBACK_URL || '/authenticate/google/cb'
 }, (accessToken, refreshToken, profile, next) => {
-  console.log(profile)
   const googleId = profile.id;
   const name = profile.displayName;
   const email = profile.emails ? profile.emails[0].value : undefined;
@@ -71,3 +70,42 @@ passport.use('google-auth', new GoogleStrategy({
     })
     .catch(error => next(error))
 })); 
+
+
+passport.use('spotify', new SpotifyStrategy({
+      clientID: process.env.SPOTIFY_CLIENT_ID,
+      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+      callbackURL: process.env.SPOTIFY_SPOTIFY_CALLBACK_URL || '/auth/spotify/callback'
+    }, (accessToken, refreshToken, expires_in, profile, next) => {
+      console.log(profile)
+      const spotifyId = profile.id;
+      const name = profile.displayName;
+      const email = profile.emails ? profile.emails[0].value : undefined;
+      const avatarURL = profile.photos[0];
+      User.findOne({
+        $or: [
+          { email: email },
+          { 'social.spotifyId': spotifyId }
+        ]
+      })
+        .then(user => {
+          if (user) {
+            next(null, user);
+          } else if (!user) {
+            user = new User({
+              name: name,
+              email: email,
+              password: Math.random().toString(35), // Be carefully only for dev purposes, Math.random seed is predictable!!
+              social: {
+                spotifyId: spotifyId
+              },
+              avatarURL: avatarURL
+            })
+            return user.save()
+              .then(user => next(null, user))
+          }
+        })
+        .catch(error => next(error))
+    }
+  )
+);

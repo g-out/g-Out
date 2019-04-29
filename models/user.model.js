@@ -36,10 +36,8 @@ const userSchema = new mongoose.Schema({
     }
   ],
   social: {
-    googleId: {
-      type: String,
-      unique: true
-    }
+    googleId: String,
+    spotifyId: String,
   },  avatarURL: String
 }, { timestamps: true })
 

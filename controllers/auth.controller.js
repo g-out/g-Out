@@ -97,15 +97,17 @@ module.exports.loginWithSpotifyCallback = (req, res, next) => {
   })(req, res, next);
 }
 
+module.exports.profile = (req, res, next) => {
+  res.render('auth/profile')
+}
+
 module.exports.logout = (req, res, next) => {
   req.logout();
   res.redirect('/login');
 }
 
 /*
-module.exports.profile = (req, res, next) => {
-  res.render('auth/profile')
-}
+
 
 module.exports.doProfile = (req, res, next) => {
   if (!req.body.password) {

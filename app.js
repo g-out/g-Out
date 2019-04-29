@@ -9,7 +9,7 @@ const passport = require('passport');
 
 require('./config/db.config');
 require('./config/hbs.config');
-//const session = require('./config/session.config');
+const session = require('./config/session.config');
 require('./config/passport.config');
 
 // Esto lo tenemos que hacer nosotros desde aqui
@@ -28,19 +28,18 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session())
-/* 
+ 
 app.use(session);
-
-
 app.use((req, res, next) => {
   res.locals.path = req.path;
   res.locals.session = req.user;
+  console.log(res.locals.path);
+  console.log(res.locals.session);
   next();
 })
-*/
-app.use('/', authRouter);
- 
 
+
+app.use('/', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

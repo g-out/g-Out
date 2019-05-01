@@ -8,6 +8,7 @@
     "dev": "DEBUG=g-out:* nodemon -e hbs,js,css,.env ./bin/www"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bcrypt": "^3.0.5",
     "cloudinary": "^1.14.0",
     "connect-mongo": "^2.0.3",

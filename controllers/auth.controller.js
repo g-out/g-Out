@@ -25,6 +25,7 @@ module.exports.doRegister = (req, res, next) => {
     if (user) {
       renderWithErrors({ email: 'Email already registered' })
     } else {
+      console.log(req.body)
       user = new User(req.body);
       return user.save()
       .then(user => res.redirect('/login'))

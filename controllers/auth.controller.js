@@ -102,10 +102,10 @@ module.exports.profile = (req, res, next) => {
 }
 
 module.exports.logout = (req, res, next) => {
-  req.logout();
-  res.redirect('/login');
+  req.session.destroy((err) => {
+    res.redirect('/login');
+  })
 }
-
 /*
 
 

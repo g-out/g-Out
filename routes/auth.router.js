@@ -10,7 +10,7 @@
  router.post('/register', auth.doRegister)
  router.get('/login', auth.login);
  router.post('/login', auth.doLogin);
- router.post('/logout', auth.logout);
+ router.get('/logout', auth.logout);
  router.get('/profile', secure.isAuthenticated, auth.profile)
  router.get('/authenticate/google', passport.authenticate('google-auth', { scope: ['openid', 'profile', 'email'] }))
  router.get('/authenticate/google/cb', auth.loginWithGoogleCallback)

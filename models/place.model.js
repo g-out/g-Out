@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+require('dotenv').config();
+
+
 const placeSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -20,24 +23,22 @@ const placeSchema = new mongoose.Schema({
   userEmail: {
     type: String
   },
-  category: [
-    {
+  category: {
       food: {
         type: [String],
-        // num: ["Asiatica", "Española", "Italiana", "Moderna"],
-        // required: [true, 'Name is required']
+        num: process.env.FOOD_TYPE,
+        required: [true, 'Food type is required']
       },
       music: {
         type: [String],
-        // num: ["techno", "house", "pop", "salsa", "rock", "reggaeton", "funky"],
-        // required: [true, 'Name is required']
+        num: process.env.MUSIC_TYPE,
+        required: [true, 'Music type is required']
       },
-    }
-  ],
+  },
   localType: {
     type: String,
-    // required: [true, 'Name is required'],
-    // num: ["pub", "restaurant", "disco", "bar", "coffee"]
+    required: [true, 'Local type is required'],
+    num: process.env.PLACE_TYPE
   } 
 }, { timestamps: true })
 

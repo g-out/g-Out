@@ -1,6 +1,6 @@
 // archivo de creacion de base de datos
 
-require('dotenv').config();
+const constants = require('../constants')
 
 const axios = require('axios');
 const User = require('../models/user.model');
@@ -10,9 +10,9 @@ const Booking = require('../models/booking.model');
 const mongoose = require('mongoose');
 require('../config/db.config');
 
-const musicsType = process.env.MUSIC_TYPE
-const foodsType = process.env.FOOD_TYPE
-const placesType = process.env.PLACE_TYPE
+const musicsType = constants.MUSIC_TYPE
+const foodsType = constants.FOOD_TYPE
+const placesType = constants.PLACE_TYPE
 
 const usersEmail = []
 
@@ -59,7 +59,6 @@ function createPlaces(datas) {
   console.log(places)
   Places.create(places)
   .then((places) => {
-    console.log('asdfghjkjhgfdsdfghjklkjhgf')
     console.info(`${places.length} new places added to the database`)})
   .catch(error => console.error(error))
   .then(() => mongoose.connection.close());
@@ -71,15 +70,14 @@ function sleeper(ms) {
     return new Promise(resolve => setTimeout(() => resolve(x), ms));
   };
 } 
-
-for (i=0; i<=placesType.length; i++) {
+for (i=0; i <= placesType.length; i++) {
   let results = []
   axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
     params: {
       location: "40.425530, -3.703252",
       radius: "10000",
       type: placesType[i],
-      key: process.env.GOOGLE_API_KEY
+      key: constants.GOOGLE_API_KEY
     }
   })
     .then(sleeper(1500))
@@ -87,7 +85,7 @@ for (i=0; i<=placesType.length; i++) {
       axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
         params: {
           pagetoken: response.data.next_page_token,
-          key: process.env.GOOGLE_API_KEY
+          key: constants.GOOGLE_API_KEY
         }
       })
         .then(sleeper(1500))
@@ -95,7 +93,7 @@ for (i=0; i<=placesType.length; i++) {
           axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
             params: {
               pagetoken: response.data.next_page_token,
-              key: process.env.GOOGLE_API_KEY
+              key: constants.GOOGLE_API_KEY
             }
           })
             .then(sleeper(1500))

@@ -1,13 +1,10 @@
 const mongoose = require('mongoose');
 
-require('dotenv').config();
-
-
 const placeSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Name is required'],
-    // minlength: [3, 'Name needs at last 8 chars'],
+    minlength: [3, 'Name needs at last 8 chars'],
     trim: true
   },
   address: {

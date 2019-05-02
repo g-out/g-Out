@@ -11,11 +11,11 @@
  router.get('/login', auth.login);
  router.post('/login', auth.doLogin);
  router.get('/logout', auth.logout);
- router.get('/profile', secure.isAuthenticated, auth.profile)
+ router.get('/profile', secure.isAuthenticated, auth.profile);
  router.get('/authenticate/google', passport.authenticate('google-auth', { scope: ['openid', 'profile', 'email'] }))
  router.get('/authenticate/google/cb', auth.loginWithGoogleCallback)
  router.get('/auth/spotify', passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private']}))
- router.get('/auth/spotify/callback', auth.loginWithSpotifyCallback)
+ router.get('/auth/spotify/callback', auth.loginWithSpotifyCallback);
 
 
  module.exports = router;

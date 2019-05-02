@@ -25,7 +25,7 @@ module.exports.doRegister = (req, res, next) => {
     if (user) {
       renderWithErrors({ email: 'Email already registered' })
     } else {
-      console.log(req.body)
+      // console.log(req.body)
       user = new User(req.body);
       return user.save()
       .then(user => res.redirect('/login'))
@@ -74,7 +74,7 @@ module.exports.loginWithGoogleCallback = (req, res, next) => {
         if (error) {
           next(error)
         } else {
-          console.log(user)
+          // console.log(user)
           res.redirect('/');
         }
       })
@@ -90,7 +90,7 @@ module.exports.loginWithSpotifyCallback = (req, res, next) => {
         if (error) {
           next(error)
         } else {
-          console.log(user)
+          // console.log(user)
           res.redirect('/');
         }
       })

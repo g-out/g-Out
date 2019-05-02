@@ -4,7 +4,7 @@ const placeSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Name is required'],
-    minlength: [3, 'Name needs at last 8 chars'],
+    // minlength: [3, 'Name needs at last 8 chars'],
     trim: true
   },
   address: {
@@ -13,31 +13,31 @@ const placeSchema = new mongoose.Schema({
   },
   phone: {
     type: Number,
-    required: [true, 'Phone is required'],
+    // required: [true, 'Phone is required'],
     minlength: [9, 'Phone needs at last 9 chars'],
     maxlength: [9, 'Phone needs 9 chars']
   },
-  userID: {
+  userEmail: {
     type: String
   },
   category: [
     {
       food: {
         type: [String],
-        num: ["Asiatica", "Española", "Italiana", "Moderna"],
-        required: [true, 'Name is required']
+        // num: ["Asiatica", "Española", "Italiana", "Moderna"],
+        // required: [true, 'Name is required']
       },
       music: {
         type: [String],
-        num: ["techno", "house", "pop", "salsa", "rock", "reggaeton", "funky"],
-        required: [true, 'Name is required']
+        // num: ["techno", "house", "pop", "salsa", "rock", "reggaeton", "funky"],
+        // required: [true, 'Name is required']
       },
     }
   ],
   localType: {
     type: String,
-    required: [true, 'Name is required'],
-    num: ["pub", "restaurant", "disco", "bar", "coffee"]
+    // required: [true, 'Name is required'],
+    // num: ["pub", "restaurant", "disco", "bar", "coffee"]
   } 
 }, { timestamps: true })
 

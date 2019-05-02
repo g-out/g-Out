@@ -14,6 +14,7 @@ require('./config/passport.config');
 
 // Esto lo tenemos que hacer nosotros desde aqui
 const authRouter = require('./routes/auth.router');
+const localRouter = require('./routes/local.router');
 
 const app = express();
 
@@ -33,13 +34,14 @@ app.use(passport.session())
 app.use((req, res, next) => {
   res.locals.path = req.path;
   res.locals.session = req.user;
-  console.log(res.locals.path);
-  console.log(res.locals.session);
+  // console.log(res.locals.path);
+  // console.log(res.locals.session);
   next();
 })
 
 
 app.use('/', authRouter);
+app.use('/local', localRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,2 +1,18 @@
-<h1>Hola Jueves</h1>
+<h1>Hola Viernes</h1>
+<div>
+    <ul class="list-group">
+    {{#each arrLocales as |local|}}
+        <li class="list-group-item">
+           Nombre: {{local.name}}<br>
+        Dirección{{local.address}}<br>
+        Teléfono{{local.phone}}<br>
+        Mail: {{local.userEmail}}<br>
+      {{!-- Categoría {{local.category}}<br> --}}
+        Tipo: {{local.localType}}
+        <a href="/local/{{local._id}}/delete" class="btn-danger btn">Delete</a>
+        <a href="/local/edit/{{local._id}}" class="btn-success btn">Edit</a>
+        </li>
+    {{/each}}
+    </ul>
+</div>
 <a href="local/create">Add a place</a>

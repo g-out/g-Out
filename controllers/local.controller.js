@@ -6,17 +6,22 @@ const MUSIC_TYPE = constants.MUSIC_TYPE
 const PLACE_TYPE = constants.PLACE_TYPE
 
 module.exports.list = (req, res, next) => {
-    res.render('locals/list');
+    Local.find()
+    .then((arrLocal) => {
+        res.render('locals/list', {
+            arrLocales: arrLocal
+        });
+    })
+    .catch(next)
 }
 module.exports.create = (req, res, next) => {
     res.render('locals/form', {
         foods: FOOD_TYPE,
         musics: MUSIC_TYPE,
         places: PLACE_TYPE
-    });
+    })
 }
 module.exports.doCreate = (req, res, next) => {
-    console.log(req.body)
     const newLocal = new Local({
         name: req.body.name,
         address: req.body.address,
@@ -29,15 +34,33 @@ module.exports.doCreate = (req, res, next) => {
     });
 
     newLocal.save()
-        .then(()=>{
+        .then((local)=>{
             res.redirect('/local')
+            console.log(local)
         })
         .catch(error => { // errrores de validacion
-            // console.log(error)
             if(error instanceof mongoose.Error.ValidationError){
-                res.render('locals/form')
+                res.render('locals/form',  {
+                    foods: FOOD_TYPE,
+                    musics: MUSIC_TYPE,
+                    places: PLACE_TYPE
+                })
             } else {
                 next(error)
             }
         })
 }
+module.exports.delete = (req, res, next) => {
+    const id = req.params.id;
+
+    Local.findByIdAndDelete(id)
+    .then((local)=>{
+        if(local){
+            res.redirect('/local')
+        }else{
+            next(createError(404, 'Place not found'))
+        }
+    })
+    .catch(next)
+}
+

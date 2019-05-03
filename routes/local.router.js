@@ -7,7 +7,7 @@ const secure = require('../middlewares/secure.mid');
 router.get('/', secure.isAuthenticated, local.list);
 router.get('/create', secure.isAuthenticated, local.create);
 router.post('/', secure.isAuthenticated, local.doCreate);
-
+router.get('/:id/delete', secure.isAuthenticated, local.delete)
 
 
 

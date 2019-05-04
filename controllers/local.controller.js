@@ -64,3 +64,22 @@ module.exports.delete = (req, res, next) => {
     .catch(next)
 }
 
+module.exports.edit = (req, res, next) => {
+    const id = req.params.id;
+
+    Local.findById(id)
+    .then(local=>{
+        if(local){
+            res.render('locals/form', {
+                foods: FOOD_TYPE,
+                musics: MUSIC_TYPE,
+                places: PLACE_TYPE,
+                local
+            })
+        } else {
+            next(error)
+        }
+    })
+    .catch(error => next(error));
+}
+

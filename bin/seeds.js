@@ -43,7 +43,7 @@ function elementAleatory(myArray) {
 
 function createPlaces(datas, type) {
   let places = []
-  datas.foreach((data) => {
+  datas.map((data) => {
     let place = new Places({
       name: data.name ,
       address: data.vicinity,
@@ -57,6 +57,7 @@ function createPlaces(datas, type) {
     })
     places.push(place)
   })
+  console.log(places)
   Places.create(places)
   .then((places) => {
     console.info(`${places.length} new places added to the database`)})
@@ -69,16 +70,14 @@ function sleeper(ms) {
   return function(x) {
     return new Promise(resolve => setTimeout(() => resolve(x), ms));
   };
-}
-
-
+} 
 placesType.forEach((type) => {
   let results = []
   axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
     params: {
       location: "40.425530, -3.703252",
       radius: "10000",
-      type: type,
+      type: "cafe",
       key: process.env.GOOGLE_API_KEY
     }
   })
@@ -99,20 +98,19 @@ placesType.forEach((type) => {
             }
           })
             .then(sleeper(1500))
-            .then((response) => {
-               return results = [...response.data.results]
-              })
-          return results = [...response.data.results]
+            .then((response) => { return results = [...response.data.results]/* createPlaces(response, placesType[i]) */ })
+          return results = [...response.data.results]//createPlaces(response, placesType[i])
         })
-        
-        results = [...results, ...response.data.results]
-        console.log(results.length)
+        results = [...response.data.results]
+        console.log(results)
         createPlaces(results, type) 
+         /* createPlaces(response, placesType[i]) */
     })
     .catch(function (error) {
       console.log(error);
     })
 })
+
 
 /* 
 

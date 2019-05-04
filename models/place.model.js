@@ -22,12 +22,12 @@ const placeSchema = new mongoose.Schema({
   },
   category: {
       food: {
-        type: [String],
+        type: String,
         num: process.env.FOOD_TYPE,
         required: [true, 'Food type is required']
       },
       music: {
-        type: [String],
+        type: String,
         num: process.env.MUSIC_TYPE,
         required: [true, 'Music type is required']
       },

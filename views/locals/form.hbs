@@ -19,23 +19,24 @@
         <label for="">Category</label>
         <select name="food" id="">
             {{#each foods as |food|}}
-            <option value="{{food}}" {{#hasCategory local.category.food food}} selected{{/hasCategory}}>{{food}}</option>
+            <option value="{{food}}" {{#hasCategory ../local.category.food food}} selected{{/hasCategory}}>{{food}}</option>
             {{/each}}
         </select>
         <select name="music" id="">
           {{#each musics as |music|}}
-          <option value="{{music}}">{{music}}</option>
+          <option value="{{music}}"{{#hasCategory ../local.category.music music}} selected {{/hasCategory}}>{{music}}</option>
           {{/each}}
         </select>
         <div>
           <label class="custom-file-bel" for="phone">localType</label>
           <select name="localType" id="">
             {{#each places as |place|}}
-            <option value="{{place}}">{{place}}</option>
+            <option value="{{place}}"{{#hasCategory ../local.localType place}} selected {{/hasCategory}}>{{place}}</option>
             {{/each}}
           </select>
         </div>
       </div>
+          {{local}}
       <div class="form-actions">
         <button type="submit" class="btn btn-primary btn-block">Create</button>
       </div>

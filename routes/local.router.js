@@ -10,6 +10,7 @@ router.post('/', secure.isAuthenticated, local.doCreate);
 router.get('/:id/delete', secure.isAuthenticated, local.delete);
 router.get('/:id/edit', secure.isAuthenticated, local.edit);
 router.post('/:id', secure.isAuthenticated, local.doEdit)
+router.get('/:id', secure.isAuthenticated, local.details)
 
 
 

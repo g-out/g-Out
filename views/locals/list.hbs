@@ -2,6 +2,7 @@
 <div>
     <ul class="list-group">
     {{#each arrLocales as |local|}}
+      <a href="/local/{{local._id}}">
         <li class="list-group-item">
            Nombre: {{local.name}}<br>
         Dirección{{local.address}}<br>
@@ -9,9 +10,8 @@
         Mail: {{local.userEmail}}<br>
       {{!-- Categoría {{local.category}}<br> --}}
         Tipo: {{local.localType}}
-        <a href="/local/{{local._id}}/delete" class="btn-danger btn">Delete</a>
-        <a href="/local/{{local._id}}/edit" class="btn-success btn">Edit</a>
         </li>
+      </a>
     {{/each}}
     </ul>
 </div>

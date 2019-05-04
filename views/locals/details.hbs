@@ -1,0 +1,32 @@
+<div class="card mb-3">
+  <div class="row no-gutters">
+    <div class="col-md-2">
+      <img src="{{ local.thumbnailUrl }}" class="card-img" alt="{{ local.name }}">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ local.name }}</h5>
+        <p class="card-text">{{ local.address }}</p>
+
+        <div class="d-flex">
+          <a href="/local/{{local._id}}/edit" class="btn btn-sm btn-success text-white mr-3">Edit Book</a>
+
+          <form action="/local/{{local._id}}/delete" method="GET">
+            <button type="submit" class="btn btn-danger btn-sm text-white mr-3">
+              Delete Book
+            </button>
+          </form>
+
+          <a href="/comments/new/{{local._id}}" class="btn btn-sm btn-primary text-white mr-3">Add comment</a>
+        </div>
+
+        <hr/>
+
+        {{#each comments as |comment|}}
+          {{>comment comment=comment}}
+        {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

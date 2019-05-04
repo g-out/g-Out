@@ -6,6 +6,7 @@ const MUSIC_TYPE = constants.MUSIC_TYPE
 const PLACE_TYPE = constants.PLACE_TYPE
 
 module.exports.list = (req, res, next) => {
+    const id = req.params.id;
     Local.find()
     .then((arrLocal) => {
         res.render('locals/list', {
@@ -14,6 +15,23 @@ module.exports.list = (req, res, next) => {
     })
     .catch(next)
 }
+
+module.exports.details = (req, res, next) => {
+    const id = req.params.id;
+
+    Local.findById(id)
+    .then(local=>{
+        if(local){
+            res.render('locals/details', {
+                local
+            })
+        } else {
+            next(error)
+        }
+    })
+    .catch(error => next(error));
+}
+
 module.exports.create = (req, res, next) => {
     res.render('locals/form', {
         foods: FOOD_TYPE,
@@ -89,7 +107,7 @@ module.exports.doEdit = (req, res, next) => {
     Local.findByIdAndUpdate(id, req.body, {new: true, runValidators: true})
     .then ((local) => {
         if(local){
-            res.resdirect(`/local/${local._id}`)
+            res.redirect(`/local/${local._id}`)
         } else {
             next(createError(404, 'Local not found'))
         }

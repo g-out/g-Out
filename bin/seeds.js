@@ -35,11 +35,10 @@ function elementAleatory(myArray) {
   return myArray[Math.floor(Math.random()*myArray.length)]
 }
 
-/* User.create(createUsers(40))
+User.create(createUsers(40))
   .then((users) => console.info(`${users.length} new users added to the database`))
   .catch(error => console.error(error))
-  .then(() => mongoose.connection.close());
-   */
+  
 
 function createPlaces(datas, type) {
   let places = []
@@ -57,10 +56,8 @@ function createPlaces(datas, type) {
     })
     places.push(place)
   })
-  console.log(places)
   Places.create(places)
-  .then((places) => {
-    console.info(`${places.length} new places added to the database`)})
+  .then((places) => console.info(`${places.length} new places added to the database`))
   .catch(error => console.error(error))
   .then(() => mongoose.connection.close());
 }
@@ -102,7 +99,6 @@ placesType.forEach((type) => {
           return results = [...response.data.results]//createPlaces(response, placesType[i])
         })
         results = [...response.data.results]
-        console.log(results)
         createPlaces(results, type) 
          /* createPlaces(response, placesType[i]) */
     })

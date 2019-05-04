@@ -1,5 +1,6 @@
 // archivo de creacion de base de datos
 
+require('dotenv').config();
 const constants = require('../constants')
 
 const axios = require('axios');
@@ -34,15 +35,15 @@ function elementAleatory(myArray) {
   return myArray[Math.floor(Math.random()*myArray.length)]
 }
 
-User.create(createUsers(40))
+/* User.create(createUsers(40))
   .then((users) => console.info(`${users.length} new users added to the database`))
   .catch(error => console.error(error))
   .then(() => mongoose.connection.close());
-  
+   */
 
-function createPlaces(datas) {
+function createPlaces(datas, type) {
   let places = []
-  datas.map((data) => {
+  datas.foreach((data) => {
     let place = new Places({
       name: data.name ,
       address: data.vicinity,
@@ -52,11 +53,10 @@ function createPlaces(datas) {
         food: elementAleatory(foodsType),
         music: elementAleatory(musicsType),
       },
-      localType: elementAleatory(placesType),
+      localType: type,
     })
     places.push(place)
   })
-  console.log(places)
   Places.create(places)
   .then((places) => {
     console.info(`${places.length} new places added to the database`)})
@@ -69,15 +69,17 @@ function sleeper(ms) {
   return function(x) {
     return new Promise(resolve => setTimeout(() => resolve(x), ms));
   };
-} 
-for (i=0; i <= placesType.length; i++) {
+}
+
+
+placesType.forEach((type) => {
   let results = []
   axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
     params: {
       location: "40.425530, -3.703252",
       radius: "10000",
-      type: placesType[i],
-      key: constants.GOOGLE_API_KEY
+      type: type,
+      key: process.env.GOOGLE_API_KEY
     }
   })
     .then(sleeper(1500))
@@ -85,7 +87,7 @@ for (i=0; i <= placesType.length; i++) {
       axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
         params: {
           pagetoken: response.data.next_page_token,
-          key: constants.GOOGLE_API_KEY
+          key: process.env.GOOGLE_API_KEY
         }
       })
         .then(sleeper(1500))
@@ -93,18 +95,56 @@ for (i=0; i <= placesType.length; i++) {
           axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
             params: {
               pagetoken: response.data.next_page_token,
-              key: constants.GOOGLE_API_KEY
+              key: process.env.GOOGLE_API_KEY
             }
           })
             .then(sleeper(1500))
-            .then((response) => { return results = [...response.data.results]/* createPlaces(response, placesType[i]) */ })
-          return results = [...response.data.results]//createPlaces(response, placesType[i])
+            .then((response) => {
+               return results = [...response.data.results]
+              })
+          return results = [...response.data.results]
         })
-        results = [...response.data.results]
-        createPlaces(results) 
-         /* createPlaces(response, placesType[i]) */
+        
+        results = [...results, ...response.data.results]
+        console.log(results.length)
+        createPlaces(results, type) 
     })
     .catch(function (error) {
       console.log(error);
     })
+})
+
+/* 
+
+function sleep(delay) {
+  return (x) => new Promise((resolve, reject) =>
+    setTimeout(() => resolve(x), delay)
+  )
 }
+
+sleep(1500)('Carlos')
+  .then(name => console.log(name));
+
+
+module.exports.isAdmin = (res, res, next) => {
+  if (req.user.role === 'admin') {
+    next()
+  } else {
+    next(createError(403))
+  }
+}
+
+
+module.exports.checkRole = (role) => {
+  return (req, res, next) => {
+    if (req.user.role === role) {
+      next()
+    } else {
+      next(createError(403))
+    }
+  }
+}
+
+
+router.get('/users', isAdmin, users.list)
+router.get('/users', checkRole('admin'), users.list) */

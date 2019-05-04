@@ -13,7 +13,7 @@ const placeSchema = new mongoose.Schema({
   },
   phone: {
     type: Number,
-    // required: [true, 'Phone is required'],
+    //    required: [true, 'Phone is required'],
     minlength: [9, 'Phone needs at last 9 chars'],
     maxlength: [9, 'Phone needs 9 chars']
   },

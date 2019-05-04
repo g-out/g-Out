@@ -83,3 +83,32 @@ module.exports.edit = (req, res, next) => {
     .catch(error => next(error));
 }
 
+module.exports.doEdit = (req, res, next) => {
+    const id = req.params.id;
+
+    Local.findByIdAndUpdate(id, req.body, {new: true, runValidators: true})
+    .then ((local) => {
+        if(local){
+            res.resdirect(`/local/${local._id}`)
+        } else {
+            next(createError(404, 'Local not found'))
+        }
+    })
+    .catch((error) => {
+        if (error instanceof mongoose.Error.ValidationError) {
+          const local = new Local({ ...req.body, _id: id })
+          local.isNew = false
+  
+          res.render('locals/form', {
+            foods: FOOD_TYPE,
+                musics: MUSIC_TYPE,
+                places: PLACE_TYPE,
+                local,
+            ...error
+          })
+        } else {
+          next(error);
+        }
+      })
+}
+

@@ -1,18 +1,19 @@
-<h1>Hola Viernes</h1>
-<div>
-    <ul class="list-group">
-    {{#each arrLocales as |local|}}
-      <a href="/local/{{local._id}}">
-        <li class="list-group-item">
-           Nombre: {{local.name}}<br>
-        Dirección{{local.address}}<br>
-        Teléfono{{local.phone}}<br>
-        Mail: {{local.userEmail}}<br>
-      {{!-- Categoría {{local.category}}<br> --}}
-        Tipo: {{local.localType}}
-        </li>
-      </a>
-    {{/each}}
-    </ul>
-</div>
-<a href="local/create">Add a place</a>
+<body class="no-background">
+  <div class="div-scroll">
+      <ul class="list-group">
+      {{#each arrLocales as |local|}}
+        <a class="lista-lugares" href="/local/{{local._id}}">
+          <li class="list-group-item">
+            <p class="no-decoration"><span class="p-black">Nombre:</span> {{local.name}}</p>
+            <p class="no-decoration"><span class="p-black">Dirección:</span> {{local.address}}</p>
+            <p class="no-decoration"><span class="p-black">Teléfono:</span> {{local.phone}}</p>
+            <p class="no-decoration"><span class="p-black">Mail:</span> {{local.userEmail}}</p>
+          {{!-- Categoría {{local.category}}<br> --}}
+            <p><span class="p-black">Tipo:</span> {{local.localType}}</p>
+          </li>
+        </a>
+      {{/each}}
+      </ul>
+  </div>
+  <p class="p-add"><a href="local/create">Add a place</a></p>
+</body>

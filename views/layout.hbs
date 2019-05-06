@@ -7,34 +7,25 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
   </head>
   <body>
+    <script>
+      var places = {
+        "type": "FeatureCollection",
+        "features": []
+      }
+    </script>
+
     {{>navbar }}
     <div class="container mt-5">
       {{{ body }}}
     </div>
 
-    <script>
-      map.on('load', function(e) {
-        // Add the data to your map as a layer
-        map.addLayer({
-          id: 'locations',
-          type: 'symbol',
-          // Add a GeoJSON source containing place coordinates and information.
-          source: {
-            type: 'geojson',
-            data: stores
-          },
-          layout: {
-            'icon-image': 'restaurant-15',
-            'icon-allow-overlap': true,
-          }
-        });
-      });
-    </script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/js/map.js"></script>
     <script src="/js/index.js"></script>
+    
   </body>
 </html>

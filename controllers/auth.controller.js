@@ -1,10 +1,43 @@
 const mongoose = require('mongoose');
 const User = require('../models/user.model');
+const Place = require('../models/place.model');
 const passport = require('passport')
 
 
 module.exports.home = (req, res, next) => {
-  res.render('auth/home')
+  Place.find()
+    .then(places => {
+      const mapboxPlaces = places.map(place => {
+        return {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              -77.043959498405,
+              38.903883387232
+            ]
+          },
+          "properties": {
+            "phoneFormatted": "(202) 331-3355",
+            "phone": "2023313355",
+            "address": "1901 L St. NW",
+            "city": "Washington DC",
+            "country": "United States",
+            "crossStreet": "at 19th St",
+            "postalCode": "20036",
+            "state": "D.C."
+          }
+        }
+      });
+
+      const mapboxData = {
+        "type": "FeatureCollection",
+        "features": mapboxPlaces
+      }
+      res.render('auth/home', {places, mapboxData: JSON.stringify(mapboxData)})
+    })
+    .catch(next)
+  
 }
 
 module.exports.register = (req, res, next) => {

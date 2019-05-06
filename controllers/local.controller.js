@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Local = require('./../models/place.model')
+const Favorite = require('./../models/favorites.model')
 const constants = require('../constants')
 const FOOD_TYPE = constants.FOOD_TYPE
 const MUSIC_TYPE = constants.MUSIC_TYPE
@@ -134,16 +135,21 @@ module.exports.doEdit = (req, res, next) => {
 module.exports.doLike = (req, res, next) => {
     const placeID = req.params.id;
     const userID = res.locals.session._id;
+    console.log(placeID+' user '+ userID)
 
-    const newLike = new Like({
-        placeID, userID
+    const newLike = new Favorite({
+        placeID: placeID,
+        userID: userID
     })
-
+    console.log(newLike)
     newLike.save()
-    .then((newLike) =>{
-        res.redirect('/local')
-        console.log(newLike)
-    })
-    .catch(error =>next(error))
+        .then((newLike) => {
+            console.log(newLike.placeID)
+            return Favorite.count({placeID: newLike.placeID})
+                .then(likes => {
+                    res.json({likes});
+                })
+        })
+        .catch(error =>next(error))
 }
 

@@ -130,3 +130,16 @@ module.exports.doEdit = (req, res, next) => {
       })
 }
 
+module.exports.doLike = (req, res, next) => {
+    const id = req.params.id;
+
+  setTimeout(() => {
+    Local.findByIdAndUpdate(id, { $inc: { likes: 1 } }, { new: true })
+      .then((local) => res.json({
+        localId: local._id,
+        likes: local.likes
+      }))
+      .catch(next)
+  }, 3000)
+}
+

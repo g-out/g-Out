@@ -94,3 +94,7 @@ box-sizing: border-box;
 .all-form{
   text-align: center;
 }
+.fa-heart:before {
+  content: "\f004";
+  color: black;
+}

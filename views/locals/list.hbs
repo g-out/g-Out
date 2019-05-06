@@ -10,8 +10,16 @@
             <p class="no-decoration"><span class="p-black">Mail:</span> {{local.userEmail}}</p>
           {{!-- Categoría {{local.category}}<br> --}}
             <p><span class="p-black">Tipo:</span> {{local.localType}}</p>
+            </a>
+            <i class="fas fa-heart"></i>
+            <div>
+              <button class="btn btn-sm btn-secondary" onclick="onClickLikeLocal(event)"
+                data-local-id="{{local._id}}">
+                {{ localId.likes }} Likes
+              </button>
+            </div>
           </li>
-        </a>
+        
       {{/each}}
       </ul>
   </div>

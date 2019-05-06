@@ -132,15 +132,18 @@ module.exports.doEdit = (req, res, next) => {
 }
 
 module.exports.doLike = (req, res, next) => {
-    const id = req.params.id;
+    const placeID = req.params.id;
+    const userID = res.locals.session._id;
 
-  setTimeout(() => {
-    Local.findByIdAndUpdate(id, { $inc: { likes: 1 } }, { new: true })
-      .then((local) => res.json({
-        localId: local._id,
-        likes: local.likes
-      }))
-      .catch(next)
-  }, 3000)
+    const newLike = new Like({
+        placeID, userID
+    })
+
+    newLike.save()
+    .then((newLike) =>{
+        res.redirect('/local')
+        console.log(newLike)
+    })
+    .catch(error =>next(error))
 }
 

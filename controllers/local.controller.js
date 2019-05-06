@@ -48,6 +48,7 @@ module.exports.doCreate = (req, res, next) => {
             food: req.body.food,
             music: req.body.music,
         }, 
+        userEmail: res.locals.session.email,
         localType: req.body.localType
     });
 

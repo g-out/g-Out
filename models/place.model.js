@@ -18,7 +18,8 @@ const placeSchema = new mongoose.Schema({
     maxlength: [9, 'Phone needs 9 chars']
   },
   userEmail: {
-    type: String
+    type: String,
+    required: [true, 'Name is required']
   },
   category: {
       food: {

@@ -5,17 +5,16 @@
     {{else}}
     <form action="/local/{{local._id}}" method="POST">
    {{/if}} 
-      <div class="form-group">
-        <div class="custom-fi">
-          <label class="custom-file-ll" for="nombre">Name</label>
-          <input type="text" class="name" name="name" value="{{local.name}}">
-          <label class="custom-file-bel" for="address">Address</label>
-          <input type="text" class="address" name="address" value="{{local.address}}">
-          <label class="custom-file-bel" for="phone">Phone</label>
-          <input type="number" class="phone" name="phone" value="{{local.phone}}">
+      <div class="all-form">
+          <label class="custom-file-l" for="nombre">Name</label>
+          <input type="text" class="div-input" name="name" value="{{local.name}}">
+          <label class="custom-file-l" for="address">Address</label>
+          <input type="text" class="div-input" name="address" value="{{local.address}}">
+          <label class="custom-file-l" for="phone">Phone</label>
+          <input type="number" class="div-input" name="phone" value="{{local.phone}}">
           {{!-- <input type="text" class="cat"> --}}
-        </div>
-        <label for="">Category</label>
+        <div class="div-localType">
+        <label class="custom-file-l" for="">Category</label>
         <select name="food" id="">
             {{#each foods as |food|}}
             <option value="{{food}}" {{#hasCategory ../local.category.food food}} selected{{/hasCategory}}>{{food}}</option>
@@ -26,8 +25,9 @@
           <option value="{{music}}"{{#hasCategory ../local.category.music music}} selected {{/hasCategory}}>{{music}}</option>
           {{/each}}
         </select>
-        <div>
-          <label class="custom-file-bel" for="phone">localType</label>
+        </div>
+        <div class="div-localType">
+          <label class="custom-file-l" for="phone">localType</label>
           <select name="localType" id="">
             {{#each places as |place|}}
             <option value="{{place}}"{{#hasCategory ../local.localType place}} selected {{/hasCategory}}>{{place}}</option>
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="form-actions">
-        <button type="submit" class="btn btn-primary btn-block">Create</button>
+        <button type="submit" class="btn btn-primary btn-block boton-create">Create</button>
       </div>
     </form>
   </div>

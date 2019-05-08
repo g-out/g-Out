@@ -9,23 +9,20 @@ module.exports.home = (req, res, next) => {
     .then(places => {
       const mapboxPlaces = places.map(place => {
         return {
-          "type": "Feature",
-          "geometry": {
-            "type": "Point",
-            "coordinates": [
-              -77.043959498405,
-              38.903883387232
-            ]
-          },
+          "type": place.localType,
+          "geometry": place.addresMap,
           "properties": {
-            "phoneFormatted": "(202) 331-3355",
-            "phone": "2023313355",
-            "address": "1901 L St. NW",
-            "city": "Washington DC",
-            "country": "United States",
-            "crossStreet": "at 19th St",
-            "postalCode": "20036",
-            "state": "D.C."
+            //"phoneFormatted": "(202) 331-3355",
+            "phone": place.phone,
+            "address": place.address,
+            "description": place.shortDescription,
+            "image": place.imageThumbs,
+            "category" : place.category
+            //"city": "Washington DC",
+            //"country": "United States",
+            //"crossStreet": "at 19th St",
+            // "postalCode": "20036",
+            // "state": "D.C."
           }
         }
       });

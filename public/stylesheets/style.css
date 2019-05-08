@@ -218,3 +218,7 @@ box-sizing: border-box;
 .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
   border-bottom-color: #91c949;
 }
+
+.card-body{
+  color: #000;
+}

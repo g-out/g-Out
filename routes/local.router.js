@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const local = require('../controllers/local.controller');
+const comments =  require('../controllers/local.controller');
 const secure = require('../middlewares/secure.mid');
 
 
@@ -12,6 +13,15 @@ router.get('/:id/edit', secure.isAuthenticated, local.edit);
 router.post('/:id/like', secure.isAuthenticated, local.doLike);
 router.post('/:id', secure.isAuthenticated, local.doEdit);
 router.get('/:id', secure.isAuthenticated, local.details);
+
+//router comments
+router.get('/local/:id', comments.createComment);
+router.post('/local/:id/newComment', comments.doCreateComment);
+
+// router.get('/:id/edit', commentsController.edit);
+// router.post('/:id', commentsController.doEdit);
+
+// router.post('/:id/delete', commentsController.delete);
 
 
 

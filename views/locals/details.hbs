@@ -1,4 +1,5 @@
-<div class="card mb-3">
+ <div class="card mb-3">
+
   <div class="row no-gutters">
     <div class="col-md-2">
       <img src="{{ local.thumbnailUrl }}" class="card-img" alt="{{ local.name }}">
@@ -17,16 +18,62 @@
             </button>
           </form>
 
-          <a href="/comments/new/{{local._id}}" class="btn btn-sm btn-primary text-white mr-3">Add comment</a>
         </div>
 
         <hr/>
-
-        {{#each comments as |comment|}}
-          {{>comment comment=comment}}
-        {{/each}}
-        </ul>
       </div>
     </div>
   </div>
 </div>
+
+<!-- form comments -->
+
+{{#if errors}}
+  <div class="alert alert-danger" role="alert">
+    review the form data
+  </div>
+{{/if}}
+
+{{#if comment.isNew}}
+  <form action="/comments" method="POST">
+{{else}}
+  <form action="/local/:id/newComment" method="POST">
+{{/if}}
+
+  <input type="hidden" name="place" value="{{comment.place}}"/>
+
+  <div class="form-group">
+    <label>Comment title</label>
+    <input type="text" class="form-control {{#if errors.title }}is-invalid{{/if}}" name="title" value="{{comment.title}}"
+      placeholder="Enter comment title">
+
+    {{#if errors.title }}
+    <div class="invalid-feedback">
+      {{errors.title}}
+    </div>
+    {{/if}}
+  </div>
+
+  <div class="form-group">
+    <label>Comment content</label>
+    <textarea class="form-control {{#if errors.content }}is-invalid{{/if}}"
+      name="content">{{comment.content}}</textarea>
+  
+    {{#if errors.content }}
+    <div class="invalid-feedback">
+      {{errors.content}}
+    </div>
+    {{/if}}
+  </div>
+
+  <div class="d-flex">
+    <button type="submit" class="btn btn-primary mr-3">Add comment</button>
+    <a class="btn btn-secondary" href="/place/{{comment.place}}">Back</a>
+  </div>
+</form>
+
+        {{#each comments as |comment|}}
+          {{>comment comment=comment}}
+        {{/each}}
+ 
+      

@@ -1,14 +1,8 @@
 const mongoose = require('mongoose');
 
 const favSchema = new mongoose.Schema({  
-  userID: {
-    type: String,
-    required: [true, 'User is required']
-  },
-  placeID: {
-    type: String,
-    required: [true, 'Place is required']
-  }
+  user: { type: mongoose.Types.ObjectId, ref: 'User', },
+  place: { type: mongoose.Types.ObjectId, ref: 'Place', },
 }, { timestamps: true })
 
 

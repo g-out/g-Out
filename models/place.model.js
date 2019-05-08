@@ -7,20 +7,39 @@ const placeSchema = new mongoose.Schema({
     minlength: [3, 'Name needs at last 8 chars'],
     trim: true
   },
-  address: {
+  addressMap: {
     type: {Type: String},
-    coordinates: [Number]
+    location: [Number]
   },
+  address: String,
   phone: {
     type: Number,
-    //    required: [true, 'Phone is required'],
+    required: [true, 'Phone is required'],
     minlength: [9, 'Phone needs at last 9 chars'],
     maxlength: [9, 'Phone needs 9 chars']
   },
   userEmail: {
     type: String,
-    required: [true, 'Name is required']
+    required: [true, 'Email is required']
   },
+  userID: {
+    type: String,
+    required: [true, 'UserID is required']
+  },
+  shortDescription: {
+    type: String,
+    default: ''
+  },
+  LongDescription: {
+    type: String,
+    default: ''
+  },
+  imageThumbs: {
+    type: String,
+    required: [true, 'image is required'],
+    default: '/img/coffe.jpeg'
+  },
+  images: [String],
   category: {
       food: {
         type: String,

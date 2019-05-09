@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Local = require('./../models/place.model')
-const Comment = require('../models/comment.model');
+const Comment = require('../models/comments.model');
 const Favorite = require('./../models/favorites.model')
 const constants = require('../constants')
 const FOOD_TYPE = constants.FOOD_TYPE
@@ -8,7 +8,6 @@ const MUSIC_TYPE = constants.MUSIC_TYPE
 const PLACE_TYPE = constants.PLACE_TYPE
 
 module.exports.list = (req, res, next) => {
-    const id = req.params.id;
     Local.find()
     .then((arrLocal) => {
         res.render('locals/list', {
@@ -154,22 +153,18 @@ module.exports.doLike = (req, res, next) => {
         .catch(error =>next(error))
 }
 
-
-//comments controller
-module.exports.createComment = (req, res, next) => {
-    console.log('hhhh')
-    const comment = new Comment ({ place: req.params.id});
-    res.redirect(`/local`);
-}
-
 module.exports.doCreateComment = (req, res, next) => {
-    const comment = new Comment(req.body)
+    console.log('eva')
+    const newComment = new Comment({
+        title: req.body.title,
+        comment: req.body.content
+    });
   
-    comment.save()
-      .then((comment) => res.redirect(`/local}`))
+    newComment.save()
+      .then((comment) => res.redirect('/local'))
       .catch((error) => {
         if (error instanceof mongoose.Error.ValidationError) {
-          res.rendirect(`/local/${local._id}`, {
+          res.render(`/local/${local._id}`, {
             comment,
             ...error
           })
@@ -178,6 +173,8 @@ module.exports.doCreateComment = (req, res, next) => {
         }
       });
   }
+
+  
   
 //   module.exports.edit = (req, res, next) => {
 //     const id = req.params.id;

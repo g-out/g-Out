@@ -34,11 +34,11 @@
   </div>
 {{/if}}
 
-{{#if comment.isNew}}
-  <form action="/comments" method="POST">
-{{else}}
-  <form action="/local/:id/newComment" method="POST">
-{{/if}}
+{{!-- {{#if comment.isNew}} --}}
+  <form action="{{local._id}}/comments" method="POST">
+{{!-- {{else}}
+  <form action="/local" method="POST">
+{{/if}} --}}
 
   <input type="hidden" name="place" value="{{comment.place}}"/>
 

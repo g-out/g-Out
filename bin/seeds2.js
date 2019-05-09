@@ -5,7 +5,7 @@ const QUERY_GOOGLE_DATA = {
   radius: "10000",
   type: type,
   key: process.env.GOOGLE_API_KEY
-}
+} 
 
 require('dotenv').config();
 const constants = require('../constants')
@@ -13,7 +13,7 @@ const constants = require('../constants')
 const axios = require('axios');
 const User = require('../models/user.model');
 const Places = require('../models/place.model');
-const Valuations = require('../models/valuations.model');
+const Comments = require('../models/comments.model');
 const Booking = require('../models/booking.model');
 const mongoose = require('mongoose');
 require('../config/db.config');
@@ -278,4 +278,4 @@ module.exports.checkRole = (role) => {
 
 
 router.get('/users', isAdmin, users.list)
-router.get('/users', checkRole('admin'), users.list) */ */
+router.get('/users', checkRole('admin'), users.list) */

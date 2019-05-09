@@ -15,8 +15,7 @@ router.post('/:id', secure.isAuthenticated, local.doEdit);
 router.get('/:id', secure.isAuthenticated, local.details);
 
 //router comments
-router.get('/local/:id', comments.createComment);
-router.post('/local/:id/newComment', comments.doCreateComment);
+router.post('/:id/comments', comments.doCreateComment);
 
 // router.get('/:id/edit', commentsController.edit);
 // router.post('/:id', commentsController.doEdit);

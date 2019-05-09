@@ -1,16 +1,15 @@
 const mongoose = require('mongoose');
 
-const valueSchema = new mongoose.Schema({
-  user: { type: mongoose.Types.ObjectId, ref: 'User', },
-  place: { type: mongoose.Types.ObjectId, ref: 'Place', },
-  comments: {
-    type: String
-  },
+const commentSchema = new mongoose.Schema({
   title: {
-    type: String
-  }
-}, { timestamps: true })
+    type: String,
+    required: [true, 'title is required']
+  },
+  user: { type: mongoose.Types.ObjectId, ref: 'User' }, 
+  comment: String,
+  place: { type: mongoose.Types.ObjectId, ref: 'Place' }
+}, {timestamps: true})
 
+const Comment = mongoose.model('Comments', commentSchema);
 
-const Value = mongoose.model('Valuations', valueSchema);
-module.exports = Value;
+module.exports = Comment;

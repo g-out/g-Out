@@ -1,8 +1,11 @@
 const mongoose = require('mongoose')
+
 const Local = require('./../models/place.model')
 const Comment = require('../models/comments.model');
 const Favorite = require('./../models/favorites.model')
+
 const constants = require('../constants')
+
 const FOOD_TYPE = constants.FOOD_TYPE
 const MUSIC_TYPE = constants.MUSIC_TYPE
 const PLACE_TYPE = constants.PLACE_TYPE
@@ -154,10 +157,12 @@ module.exports.doLike = (req, res, next) => {
 }
 
 module.exports.doCreateComment = (req, res, next) => {
-    console.log('eva')
     const newComment = new Comment({
         title: req.body.title,
-        comment: req.body.content
+        comment: req.body.content,
+        place: req.params.id,
+        user: res.locals.session._id
+
     });
   
     newComment.save()
@@ -183,7 +188,7 @@ module.exports.doCreateComment = (req, res, next) => {
       Local.findById(id)
         .then(local => {
           if (local) {
-            Comment.find({ local: local._id })
+            Comment.find({ place: local._id })
               .then(comments => {
                 res.render('locals/details', { local, comments })
               })

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Comment = require('../models/comments.model')
 
 const placeSchema = new mongoose.Schema({
   name: {

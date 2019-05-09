@@ -73,7 +73,8 @@
 </form>
 
         {{#each comments as |comment|}}
-          {{>comment comment=comment}}
+          <h3>{{comment.title}}</h3>
+          <p>{{comment.content}}</p><hr></hr>
         {{/each}}
  
       

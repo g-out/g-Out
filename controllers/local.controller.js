@@ -174,6 +174,27 @@ module.exports.doCreateComment = (req, res, next) => {
       });
   }
 
+  module.exports.details = (req, res, next) => {
+    const id = req.params.id;
+  
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      next(createError(404, 'Local not found'))
+    } else {
+      Local.findById(id)
+        .then(local => {
+          if (local) {
+            Comment.find({ local: local._id })
+              .then(comments => {
+                res.render('locals/details', { local, comments })
+              })
+              .catch(next)
+          } else {
+            next(createError(404, 'Local not found'))
+          }
+        })
+        .catch(error => next(error));
+    }
+  }
   
   
 //   module.exports.edit = (req, res, next) => {

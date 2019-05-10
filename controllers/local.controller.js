@@ -202,53 +202,56 @@ module.exports.doCreateComment = (req, res, next) => {
   }
   
   
-//   module.exports.edit = (req, res, next) => {
-//     const id = req.params.id;
-  
-//     Comment.findById(id)
-//       .then(comment => {
-//         if (comment) {
-//           res.render('comments/form', { comment })
-//         } else {
-//           next(createError(404, 'Comment not found'))
-//         }
-//       })
-//       .catch(error => next(error));
-//   }
-  
-//   module.exports.doEdit = (req, res, next) => {
-//     const id = req.params.id;
-  
-//     Comment.findByIdAndUpdate(id, req.body, { new: true, runValidators: true })
-//       .then((comment) => {
-//         if (comment) {
-//           res.redirect(`/books/${comment.book}`)
-//         } else {
-//           next(createError(404, 'Comment not found'))
-//         }
-//       })
-//       .catch((error) => {
-//         if (error instanceof mongoose.Error.ValidationError) {
-//           const comment = new Comment({ ...req.body, _id: id })
-//           comment.isNew = false;
-  
-//           res.render('comments/form', { comment, ...error })
-//         } else {
-//           next(error);
-//         }
-//       })
-//   }
-  
-//   module.exports.delete = (req, res, next) => {
-//     const id = req.params.id;
-  
-//     Comment.findByIdAndDelete(id)
-//       .then((comment) => {
-//         if (comment) {
-//           res.redirect(`/books/${comment.book}`)
-//         } else {
-//           next(createError(404, 'Comment not found'))
-//         }
-//       })
-//       .catch((error) => next(error))
-//   }
+ module.exports.editComment = (req, res, next) => {
+     const id = req.params.id;
+
+     Comment.findById(id)
+      .then(comment => {
+          if(comment) {
+              res.render('partials/comments', { comment })
+          } else {
+              next(createError(404, 'Comment not found'))
+          }
+      })
+      .catch(error => next(error));
+    }
+
+
+module.exports.doEditComment = (req, res, next) => {
+    const id = req.params.id;
+
+    Comment.findByIdAndUpdate(id, req.body, {new: true, runValidators: true})
+    .then((comment) => {
+        if(comment) {
+            res.redirect('/local')
+        } else{
+            next(createError(404, 'Comment not found'))
+        }
+    })
+    .catch((error) => {
+        if(error instanceof mongoose.Error.ValidationError)  {
+            comment.isNew = false;
+
+            res.render('partials/comments', { comment, ...error })
+        } else {
+            next(error);
+        }
+    })
+}
+
+
+module.exports.deleteComment = (req, res, next) => {
+    const id = req.params.id;
+
+    Comment.findByIdAndDelete(id)
+    .then((comment) => {
+        if (comment) {
+          res.redirect(`/local`)
+        } else {
+          next(createError(404, 'Comment not found'))
+        }
+      })
+      .catch((error) => next(error))
+  }
+
+

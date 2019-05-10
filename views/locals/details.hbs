@@ -19,8 +19,6 @@
           </form>
 
         </div>
-
-        <hr/>
       </div>
     </div>
   </div>
@@ -57,7 +55,7 @@
   <div class="form-group">
     <label>Comment content</label>
     <textarea class="form-control {{#if errors.content }}is-invalid{{/if}}"
-      name="content">{{comment.content}}</textarea>
+      name="content">{{comment.comment}} </textarea>
   
     {{#if errors.content }}
     <div class="invalid-feedback">
@@ -68,15 +66,23 @@
 
   <div class="d-flex">
     <button type="submit" class="btn btn-primary mr-3">Add comment</button>
-    <a class="btn btn-secondary" href="/place/{{comment.place}}">Back</a>
+    <a class="btn btn-secondary" href="/local">Back</a>
   </div>
 </form>
 
         {{#each comments as |comment|}}
           <h3>{{comment.title}}</h3>
           <p>{{comment.comment}}</p><hr></hr>
+          <div class="d-flex">
+          <a href="{{comment._id}}/editComment" class="btn btn-sm btn-success text-white mr-3">Edit Comment</a>
+
+          <form action="{{comment._id}}/deleteComment" method="GET">
+            <button type="submit" class="btn btn-danger btn-sm text-white mr-3">
+              Delete Comment
+            </button>
+          </form>
+
+        </div>
         {{/each}}
  
-      {{#each commentsUser as |cUser|}}
-      <h4>{{cUser.commentID}}</h4>
-      {{/each}}
+     

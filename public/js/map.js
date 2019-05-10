@@ -6,26 +6,17 @@ var map = new mapboxgl.Map({
   // style URL
   style: 'mapbox://styles/mapbox/light-v10',
   // initial position in [lon, lat] format
-  center: [-77.034084, 38.909671],
+  center: [-3.703252, 40.425530],
   // initial zoom
-  zoom: 14
+  zoom: 12
 });
 
 
 map.on('load', function(e) {
   // Add the data to your map as a layer
-  map.addLayer({
-    id: 'locations',
-    type: 'symbol',
-    // Add a GeoJSON source containing place coordinates and information.
-    source: {
-      type: 'geojson',
-      data: places
-    },
-    layout: {
-      'icon-image': 'restaurant-15',
-      'icon-allow-overlap': true,
-    }
+  map.addSource('places', {
+    type: 'geojson',
+    data: places
   });
   buildLocationList(places);
 });
@@ -49,14 +40,17 @@ function buildLocationList(data) {
     link.href = '#';
     link.className = 'title';
     link.dataPosition = i;
-    link.innerHTML = prop.address;
+    link.innerHTML = prop.name;
 
     // Create a new div with the class 'details' for each store
     // and fill it with the city and phone number
     var details = listing.appendChild(document.createElement('div'));
-    details.innerHTML = prop.city;
+    details.innerHTML = '<b>Address: </b>' + prop.address;
     if (prop.phone) {
-      details.innerHTML += ' · ' + prop.phoneFormatted;
+      details.innerHTML += ' · <b>Phone: </b>' + prop.phone;
+    }
+    if(prop.description){
+      details.innerHTML += '<p>' + prop.description + '</p>';
     }
 
     // Add an event listener for the links in the sidebar listing
@@ -92,36 +86,52 @@ function createPopUp(currentFeature) {
 
   var popup = new mapboxgl.Popup({ closeOnClick: false })
     .setLngLat(currentFeature.geometry.coordinates)
-    .setHTML('<h3>Sweetgreen</h3>' +
-      '<h4>' + currentFeature.properties.address + '</h4>')
+    .setHTML('<h3 style="font-size: 22px">'+currentFeature.properties.name+'</h3>' +
+      '<span style="color: black">' + currentFeature.properties.address + '</span>')
     .addTo(map);
 }
 
-// Add an event listener for when a user clicks on the map
-map.on('click', function(e) {
-  // Query all the rendered points in the view
-  var features = map.queryRenderedFeatures(e.point, { layers: ['locations'] });
-  if (features.length) {
-    var clickedPoint = features[0];
-    // 1. Fly to the point
-    flyToStore(clickedPoint);
-    // 2. Close all other popups and display popup for clicked store
-    createPopUp(clickedPoint);
-    // 3. Highlight listing in sidebar (and remove highlight for all other listings)
+
+places.features.forEach(function (marker) {
+  // Create a div element for the marker
+  var el = document.createElement('div');
+  // Add a class called 'marker' to each div
+  switch (marker.type) {
+    case "bar":
+      el.className = 'markerBar';
+    break;
+    case "Restaurant":
+      el.className = 'markerRestaurant';
+    break;
+    case "night_club":
+      el.className = 'markerNight_club';
+    break;
+    case "cafe":
+    console.log('cafe')
+      el.className = 'markerCoffe';
+    break;
+  }
+  // By default the image for your custom marker will be anchored
+  // by its center. Adjust the position accordingly
+  // Create the custom markers, set their position, and add to map
+  new mapboxgl.Marker(el, { offset: [0, -23] })
+    .setLngLat(marker.geometry.coordinates)
+    .addTo(map);
+
+
+  el.addEventListener('click', function (e) {
     var activeItem = document.getElementsByClassName('active');
+    // 1. Fly to the point
+    flyToStore(marker);
+    // 2. Close all other popups and display popup for clicked store
+    createPopUp(marker);
+    // 3. Highlight listing in sidebar (and remove highlight for all other listings)
+    e.stopPropagation();
     if (activeItem[0]) {
       activeItem[0].classList.remove('active');
     }
-    // Find the index of the store.features that corresponds to the clickedPoint that fired the event listener
-    var selectedFeature = clickedPoint.properties.address;
-
-    for (var i = 0; i < places.features.length; i++) {
-      if (places.features[i].properties.address === selectedFeature) {
-        selectedFeatureIndex = i;
-      }
-    }
-    // Select the correct list item using the found index and add the active class
-    var listing = document.getElementById('listing-' + selectedFeatureIndex);
+    var listing = document.getElementById('listing-' + i);
+    console.log(listing);
     listing.classList.add('active');
-  }
+  });
 });

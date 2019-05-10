@@ -8,11 +8,12 @@ const placeSchema = new mongoose.Schema({
     minlength: [3, 'Name needs at last 8 chars'],
     trim: true
   },
-  addressMap: {
-    type: {Type: String},
-    location: [Number]
+  location: {
+    lat: Number,
+    lng: Number,
   },
   address: String,
+  iconType: String,
   phone: {
     type: Number,
     required: [true, 'Phone is required'],

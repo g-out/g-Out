@@ -222,3 +222,30 @@ box-sizing: border-box;
 .card-body{
   color: #000;
 }
+
+.markerRestaurant, .markerNight_club, .markerBar, .markerCoffe {
+  border: none;
+  cursor: pointer;
+  height: 56px;
+  width: 56px;
+  background-color: rgba(0, 0, 0, 0);
+}
+.markerRestaurant {
+  background: url('../img/ico_restaurant.png')
+}
+
+.markerNight_club {
+  background-image: url('../img/ico_night_club.png')
+}
+
+.markerBar{
+  background: url('../img/ico_bar.png')
+}
+
+.markerCoffe{
+  background-image: url('../img/ico_coffe.png')
+}
+
+.mapboxgl-popup {
+  padding-bottom: 50px;
+}

@@ -7,22 +7,20 @@ const passport = require('passport')
 module.exports.home = (req, res, next) => {
   Place.find()
     .then(places => {
-      const mapboxPlaces = places.map(place => {
+      const mapboxPlaces = places.map(place => {       
         return {
           "type": place.localType,
-          "geometry": place.addresMap,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [place.location.lng, place.location.lat]
+          },
           "properties": {
-            //"phoneFormatted": "(202) 331-3355",
+            "name": place.name,
             "phone": place.phone,
             "address": place.address,
             "description": place.shortDescription,
             "image": place.imageThumbs,
             "category" : place.category
-            //"city": "Washington DC",
-            //"country": "United States",
-            //"crossStreet": "at 19th St",
-            // "postalCode": "20036",
-            // "state": "D.C."
           }
         }
       });

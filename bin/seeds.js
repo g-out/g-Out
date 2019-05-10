@@ -52,9 +52,14 @@ User.create(createUsers(40))
   
 
 function createPlaces(datas, type) {
-  datas.map((data) => {
+  (datas.filter(data => data.name != undefined)).forEach((data) => {
     let place = new Places({
       name: data.name,
+      location : {
+        lat: data.geometry.location.lat,
+        lng: data.geometry.location.lng
+      },
+      iconType: data.icon,
       address: data.vicinity,
       phone: 955000111,
       userEmail: elementAleatory(users.map(user=> user.email)),
@@ -67,7 +72,6 @@ function createPlaces(datas, type) {
       },
       localType: type,
     })
-    if(place.name == undefined) {place.name = 'Los Torreznos'};
     places = [...places, place]
   })
   Places.create(places)

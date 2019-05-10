@@ -23,18 +23,16 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Password is required'],
     minlength: [8, 'Password needs at last 8 chars']
   },
-  likes: [
-    {
+  likes: {
       food: {
-        type: [String],
+        type: String,
         num: ["Asiatica", "Española", "Italiana", "Moderna"]
       },
       music: {
-        type: [String],
+        type: String,
         num: ["techno", "house", "pop", "salsa", "rock", "reggaeton", "funky"]
       },
-    }
-  ],
+    },  
   social: {
     googleId: String,
     spotifyId: String,

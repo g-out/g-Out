@@ -1,0 +1,34 @@
+<form action="/local/{{comment._id}}/newComment" method="POST">
+{{!-- {{else}}
+  <form action="/local" method="POST">
+{{/if}} --}}
+
+  <div class="form-group">
+    <label>Comment title</label>
+    <input type="text" class="form-control {{#if errors.title }}is-invalid{{/if}}" name="title" value="{{comment.title}}"
+      placeholder="Enter comment title">
+
+    {{#if errors.title }}
+    <div class="invalid-feedback">
+      {{errors.title}}
+    </div>
+    {{/if}}
+  </div>
+
+  <div class="form-group">
+    <label>Comment content</label>
+      <textarea type="text" class="form-control {{#if errors.content }}is-invalid{{/if}}" name="comment" value="{{comment.comment}}"
+      ></textarea>
+
+    {{#if errors.content }}
+    <div class="invalid-feedback">
+      {{errors.content}}
+    </div>
+    {{/if}}
+  </div>
+
+  <div class="d-flex">
+    <button type="submit" class="btn btn-primary mr-3">Save</button>
+    <a class="btn btn-secondary" href="/">Back</a>
+  </div>
+</form>

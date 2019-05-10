@@ -17,10 +17,10 @@ router.get('/:id', secure.isAuthenticated, local.details);
 //router comments
 router.post('/:id/comments', comments.doCreateComment);
 
-// router.get('/:id/edit', commentsController.edit);
-// router.post('/:id', commentsController.doEdit);
+router.get('/:id/editComment', comments.editComment);
+router.post('/:id/newComment', comments.doEditComment);
 
-// router.post('/:id/delete', commentsController.delete);
+router.get('/:id/deleteComment', comments.deleteComment);
 
 
 

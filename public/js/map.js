@@ -37,7 +37,7 @@ function buildLocationList(data) {
     // Create a new link with the class 'title' for each store
     // and fill it with the store address
     var link = listing.appendChild(document.createElement('a'));
-    link.href = '/local/' + prop.placeID;
+    link.href = '#';
     link.className = 'title';
     link.dataPosition = i;
     link.innerHTML = prop.name;
@@ -88,7 +88,7 @@ function createPopUp(currentFeature) {
 
   var popup = new mapboxgl.Popup({ closeOnClick: false })
     .setLngLat(currentFeature.geometry.coordinates)
-    .setHTML('<h3 style="font-size: 22px">'+currentFeature.properties.name+'</h3>' +
+    .setHTML('<h3 style="font-size: 22px"><a href="/local/'+ currentFeature.properties.placeID + '">'+currentFeature.properties.name+'</a></h3>' +
       '<span style="color: black">' + currentFeature.properties.address + '</span>')
     .addTo(map);
 }

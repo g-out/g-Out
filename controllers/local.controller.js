@@ -25,7 +25,9 @@ module.exports.details = (req, res, next) => {
     const id = req.params.id;
 
     Local.findById(id)
+    .populate('favorites')
     .then(local=>{
+        
         if(local){
             res.render('locals/details', {
                 local
@@ -156,15 +158,21 @@ module.exports.doLike = (req, res, next) => {
         .catch(error =>next(error))
 }
 
-/* 
+ 
 module.exports.doDislike = (req, res, next) => {
     const placeID = req.params.id;
     const userID = res.locals.session._id;
 
     Favorite.findOneAndDelete({user: userID, place: placeID})
-        .then(response => console.log('borrado'))
+        .then(response => {
+            console.log('borrado')
+            return Favorite.count({place: placeID})
+                .then(countlikes => {
+                    res.json({countlikes});
+                })
+    })
         .catch(error =>next(error))
-}    */
+}    
 
 module.exports.doCreateComment = (req, res, next) => {
     const newComment = new Comment({

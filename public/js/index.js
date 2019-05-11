@@ -4,9 +4,6 @@ function onClickLikeLocal(e) {
   const localId = e.target.dataset.localId;
   const heart = e.target
 
-  console.log(heart.parentNode)
-
-
 
   // e.target.innerText = "Loading...";
 

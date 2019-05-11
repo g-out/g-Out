@@ -53,7 +53,7 @@ function buildLocationList(data) {
       details.innerHTML += '<p>' + prop.description + '</p>';
     }
 
-    details.innerHTML += '<div><i class="fas fa-heart black heart" data-local-id="${prop.placeID}" onclick="onClickLikeLocal(event)" ></i><p class="likes">${conteo_de_likes_helpers} likes</p></div>'
+    details.innerHTML += '<div><i class="fas fa-heart black heart" data-local-id="' + prop.placeID + '" onclick="onClickLikeLocal(event)" ></i><p class="likes">${conteo_de_likes_helpers} likes</p></div>'
 
     // Add an event listener for the links in the sidebar listing
     link.addEventListener('click', function(e) {

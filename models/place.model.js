@@ -24,10 +24,7 @@ const placeSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Email is required']
   },
-  userID: {
-    type: String,
-    required: [true, 'UserID is required']
-  },
+  userID: { type: mongoose.Types.ObjectId, ref: 'User' },
   shortDescription: {
     type: String,
     default: ''

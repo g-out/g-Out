@@ -138,6 +138,11 @@ module.exports.doEdit = (req, res, next) => {
 
 module.exports.doLike = (req, res, next) => {
     const placeID = req.params.id;
+    Local.findById(placeID)
+        .populate('favorites')
+        .then(local=>{
+            res.send(local)
+        })
     const userID = res.locals.session._id;
     console.log(placeID+' user '+ userID)
 

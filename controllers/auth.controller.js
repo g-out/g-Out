@@ -21,7 +21,7 @@ module.exports.home = (req, res, next) => {
             "description": place.shortDescription,
             "image": place.imageThumbs,
             "category" : place.category,
-            "placeID": place._id
+            "placeID": place._id,
           }
         }
       });

@@ -60,11 +60,20 @@ const placeSchema = new mongoose.Schema({
 
 placeSchema.index({ location: '2dsphere' });
 
+
+//referenciamos comentarios y favoritos con lugares
 placeSchema.virtual('comments', {
   ref: 'Comments',
   localField: '_id',
   foreignField: 'place'
 })
+
+placeSchema.virtual('favorites', {
+  ref: 'Favorites',
+  localField: '_id',
+  foreignField: 'place'
+})
+
 
 const Place = mongoose.model('Place', placeSchema);
 module.exports = Place;

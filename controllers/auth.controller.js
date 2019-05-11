@@ -20,7 +20,8 @@ module.exports.home = (req, res, next) => {
             "address": place.address,
             "description": place.shortDescription,
             "image": place.imageThumbs,
-            "category" : place.category
+            "category" : place.category,
+            "placeID": place._id
           }
         }
       });

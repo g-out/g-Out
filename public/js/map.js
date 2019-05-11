@@ -37,7 +37,7 @@ function buildLocationList(data) {
     // Create a new link with the class 'title' for each store
     // and fill it with the store address
     var link = listing.appendChild(document.createElement('a'));
-    link.href = '#';
+    link.href = '/local/' + prop.placeID;
     link.className = 'title';
     link.dataPosition = i;
     link.innerHTML = prop.name;
@@ -52,6 +52,8 @@ function buildLocationList(data) {
     if(prop.description){
       details.innerHTML += '<p>' + prop.description + '</p>';
     }
+
+    details.innerHTML += '<div><i class="fas fa-heart black heart" data-local-id="${prop.placeID}" onclick="onClickLikeLocal(event)" ></i><p class="likes">${conteo_de_likes_helpers} likes</p></div>'
 
     // Add an event listener for the links in the sidebar listing
     link.addEventListener('click', function(e) {

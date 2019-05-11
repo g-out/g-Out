@@ -190,29 +190,24 @@ module.exports.doCreateComment = (req, res, next) => {
       });
   }
 
-  module.exports.details = (req, res, next) => {
+module.exports.details = (req, res, next) => {
     const id = req.params.id;
-  
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      next(createError(404, 'Local not found'))
+        next(createError(404, 'Local not found'))
     } else {
-      Local.findById(id)
-        .populate('comments')
-        .then(local => {
-            res.send(local)     
-          if (local) {
-            Comment.find({ place: local._id })
-              .then(comments => {
-                res.render('locals/details', { local, comments, like: Favorite.count() })
-              })
-              .catch(next)
-          } else {
-            next(createError(404, 'Local not found'))
-          }
-        })
-        .catch(error => next(error));
+        Local.findById(id)
+            .populate('comments')
+            .then(local => {
+                if (local) {
+                    res.render('locals/details', { local, like: Favorite.count() })
+                } else {
+                    next(createError(404, 'Local not found'))
+                }
+            })
+            .catch(error => next(error));
     }
-  }
+}
   
   
  module.exports.editComment = (req, res, next) => {

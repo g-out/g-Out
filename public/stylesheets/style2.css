@@ -114,7 +114,7 @@ a:hover {
   clear: both;
   visibility: hidden;
 }
-Next, build a function
+
 .markerRestaurant, .markerNight_club, .markerBar, .markerCoffe {
   border: none;
   cursor: pointer;
@@ -122,16 +122,15 @@ Next, build a function
   width: 56px;
   background-color: rgba(0, 0, 0, 0);
 }
-.markerRestaurant {
-  background-image: url('../img/ico_restaurant.png')
-}
-
 .markerNight_club {
   background-image: url('../img/ico_night_club.png')
 }
 
 .markerBar{
   background-image: url('../img/ico_bar.png')
+}
+.markerRestaurant{
+  background-image: url('../img/ico_rest.png')
 }
 
 .markerCoffe{

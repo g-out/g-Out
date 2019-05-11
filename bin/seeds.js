@@ -106,13 +106,13 @@ function nextPage(data) {
 placesType.forEach((type) => {
   let results = []
   axios.get(QUERY_GOOGLE_URI, {params: {...QUERY_GOOGLE_DATA, type: type}})
-    .then(sleeper(1500))
+    .then(sleeper(4000))
     .then((response) => {
       nextPage(response.data)
-        .then(sleeper(1500))
+        .then(sleeper(4000))
         .then((response) => {
           nextPage(response.data)
-            .then(sleeper(1500))
+            .then(sleeper(4000))
             .then((response) => {
               results = [...results, ...response.data.results]
               return createPlaces(results, type)

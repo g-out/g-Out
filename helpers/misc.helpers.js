@@ -8,3 +8,12 @@ hbs.registerHelper('hasCategory', (local, category, options) => {
    return options.inverse(this)
  }
 })
+
+
+hbs.registerHelper('hasLike', (local, category, options) => {
+  if (local  === category) {
+    return options.fn(this)
+  } else {
+    return options.inverse(this)
+  }
+ })

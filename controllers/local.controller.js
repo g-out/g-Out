@@ -21,24 +21,6 @@ module.exports.list = (req, res, next) => {
     .catch(next)
 }
 
-module.exports.details = (req, res, next) => {
-    const id = req.params.id;
-
-    Local.findById(id)
-    .populate('favorites')
-    .then(local=>{
-        
-        if(local){
-            res.render('locals/details', {
-                local
-            })
-        } else {
-            next(error)
-        }
-    })
-    .catch(error => next(error));
-}
-
 module.exports.create = (req, res, next) => {
     res.render('locals/form', {
         foods: FOOD_TYPE,
@@ -165,6 +147,7 @@ module.exports.doDislike = (req, res, next) => {
 
     Favorite.findOneAndDelete({user: userID, place: placeID})
         .then(response => {
+            res
             console.log('borrado')
             return Favorite.count({place: placeID})
                 .then(countlikes => {

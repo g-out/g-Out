@@ -16,9 +16,9 @@ function onClickLikeLocal(e) {
       })
       .catch(console.log)
   } else {
-    axios.post(`/local/${localId}/like`)
+    axios.post(`/local/${localId}/dislike`)
       .then((response) => {
-        heart.parentNode.querySelector('p').innerText = `${response.data.countlikes} disLikes`;        
+        heart.parentNode.querySelector('p').innerText = `${response.data.countlikes} Likes`;        
         heart.className = "fas fa-heart black"
       })
       .catch(console.log)

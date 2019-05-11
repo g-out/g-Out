@@ -8,8 +8,9 @@ module.exports.home = (req, res, next) => {
   const dataSearch= {};
   if(req.params.search) { dataSearch = {name: req.params.search}}
   Place.find()
+    .populate('favorites')
     .then(places => {
-      const mapboxPlaces = places.map(place => {       
+        const mapboxPlaces = places.sort(p => Math.random() - 0.5).map(place => {       
         return {
           "type": place.localType,
           "geometry": {
@@ -24,6 +25,8 @@ module.exports.home = (req, res, next) => {
             "image": place.imageThumbs,
             "category" : place.category,
             "placeID": place._id,
+            "favorites": place.favorites,
+            "userLoginID": res.locals.session._id 
           }
         }
       });

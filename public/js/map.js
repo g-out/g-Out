@@ -67,6 +67,7 @@ map.on('load', function (e) {
 });
 
 function buildLocationList(data) {
+
   for (i = 0; i < data.features.length; i++) {
     var currentFeature = data.features[i];
     // Shorten data.feature.properties to `prop` so we're not
@@ -98,7 +99,12 @@ function buildLocationList(data) {
       details.innerHTML += '<p>' + prop.description + '</p>';
     }
 
-    details.innerHTML += '<div><i class="fas fa-heart black heart" data-local-id="' + prop.placeID + '" onclick="onClickLikeLocal(event)" ></i><p class="likes">${conteo_de_likes_helpers} likes</p></div>'
+    const userLike = prop.favorites.map(favorite => favorite.user)
+    let classlike = ''
+
+    if(userLike.includes(prop.userLoginID)){ classlike = 'red'} else { classlike= 'black' }
+
+    details.innerHTML += '<div><i class="fas fa-heart heart ' + classlike + '" data-local-id="' + prop.placeID + '" onclick="onClickLikeLocal(event)" ></i><p class="likes">'+ prop.favorites.length +' likes</p></div>'
 
     // Add an event listener for the links in the sidebar listing
     link.addEventListener('click', function (e) {
@@ -148,17 +154,16 @@ places.features.forEach(function (marker) {
   switch (marker.type) {
     case "bar":
       el.className = 'markerBar';
-      break;
-    case "Restaurant":
-      el.className = 'markerRestaurant';
-      break;
+    break;
     case "night_club":
       el.className = 'markerNight_club';
       break;
     case "cafe":
-      console.log('cafe')
       el.className = 'markerCoffe';
-      break;
+    break;
+    case "Restaurant":
+      el.className = 'markerRestaurant';
+    break;
   }
   // By default the image for your custom marker will be anchored
   // by its center. Adjust the position accordingly

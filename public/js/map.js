@@ -12,12 +12,57 @@ var map = new mapboxgl.Map({
 });
 
 
-map.on('load', function(e) {
+map.on('load', function (e) {
   // Add the data to your map as a layer
   map.addSource('places', {
     type: 'geojson',
-    data: places
+    data: places,
+    cluster: true,
+    clusterMaxZoom: 14, // Max zoom to cluster points on
+    clusterRadius: 50
   });
+  // map.addLayer({
+  //   id: "clusters",
+  //   type: "circle",
+  //   source: "places",
+  //   filter: ["has", "point_count"],
+  //   paint: {
+  //     // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
+  //     // with three steps to implement three types of circles:
+  //     //   * Blue, 20px circles when point count is less than 100
+  //     //   * Yellow, 30px circles when point count is between 100 and 750
+  //     //   * Pink, 40px circles when point count is greater than or equal to 750
+  //     "circle-color": [
+  //       "step",
+  //       ["get", "point_count"],
+  //       "#51bbd6",
+  //       100,
+  //       "#f1f075",
+  //       750,
+  //       "#f28cb1"
+  //     ],
+  //     "circle-radius": [
+  //       "step",
+  //       ["get", "point_count"],
+  //       20,
+  //       100,
+  //       30,
+  //       750,
+  //       40
+  //     ]
+  //   }
+  // });
+  // map.addLayer({
+  //   id: "cluster-count",
+  //   type: "symbol",
+  //   source: "earthquakes",
+  //   filter: ["has", "point_count"],
+  //   layout: {
+  //     "text-field": "{point_count_abbreviated}",
+  //     "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+  //     "text-size": 12
+  //   }
+  // });
   buildLocationList(places);
 });
 
@@ -49,14 +94,14 @@ function buildLocationList(data) {
     if (prop.phone) {
       details.innerHTML += ' · <b>Phone: </b>' + prop.phone;
     }
-    if(prop.description){
+    if (prop.description) {
       details.innerHTML += '<p>' + prop.description + '</p>';
     }
 
     details.innerHTML += '<div><i class="fas fa-heart black heart" data-local-id="' + prop.placeID + '" onclick="onClickLikeLocal(event)" ></i><p class="likes">${conteo_de_likes_helpers} likes</p></div>'
 
     // Add an event listener for the links in the sidebar listing
-    link.addEventListener('click', function(e) {
+    link.addEventListener('click', function (e) {
       // Update the currentFeature to the store associated with the clicked link
       var clickedListing = data.features[this.dataPosition];
       // 1. Fly to the point associated with the clicked link
@@ -70,7 +115,7 @@ function buildLocationList(data) {
       }
       this.parentNode.classList.add('active');
     });
-  
+
   }
 }
 
@@ -86,9 +131,11 @@ function createPopUp(currentFeature) {
   // Check if there is already a popup on the map and if so, remove it
   if (popUps[0]) popUps[0].remove();
 
-  var popup = new mapboxgl.Popup({ closeOnClick: false })
+  var popup = new mapboxgl.Popup({
+      closeOnClick: false
+    })
     .setLngLat(currentFeature.geometry.coordinates)
-    .setHTML('<img src="'+currentFeature.properties.image+'"><h3 style="font-size: 22px"><a href="/local/'+ currentFeature.properties.placeID + '">'+currentFeature.properties.name+'</a></h3>' +
+    .setHTML('<img src="' + currentFeature.properties.image + '"><h3 style="font-size: 22px"><a href="/local/' + currentFeature.properties.placeID + '">' + currentFeature.properties.name + '</a></h3>' +
       '<span style="color: black">' + currentFeature.properties.address + '</span>')
     .addTo(map);
 }
@@ -101,22 +148,24 @@ places.features.forEach(function (marker) {
   switch (marker.type) {
     case "bar":
       el.className = 'markerBar';
-    break;
+      break;
     case "Restaurant":
       el.className = 'markerRestaurant';
-    break;
+      break;
     case "night_club":
       el.className = 'markerNight_club';
-    break;
+      break;
     case "cafe":
-    console.log('cafe')
+      console.log('cafe')
       el.className = 'markerCoffe';
-    break;
+      break;
   }
   // By default the image for your custom marker will be anchored
   // by its center. Adjust the position accordingly
   // Create the custom markers, set their position, and add to map
-  new mapboxgl.Marker(el, { offset: [0, -23] })
+  new mapboxgl.Marker(el, {
+      offset: [0, -23]
+    })
     .setLngLat(marker.geometry.coordinates)
     .addTo(map);
 

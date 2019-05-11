@@ -1,5 +1,12 @@
-home {{#if inicio}} YEAHH {{/if}}
 
+<div class="input-search">
+  <form action="/" method="GET">
+  <input type="search" name="search">
+  </form>
+  <div class="clearfix"></div>
+</div>
+
+<div>
 <script>
   var places = {{{mapboxData}}};
 </script>
@@ -13,7 +20,7 @@ home {{#if inicio}} YEAHH {{/if}}
         <h1>Our locations</h1>
     </div>
     <div id='listings' class='listings'></div>
-    </div>
 </div>
 
 <div id='map' class='map pad2'>Map</div>
+</div>

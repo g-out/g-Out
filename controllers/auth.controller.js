@@ -5,6 +5,8 @@ const passport = require('passport')
 
 
 module.exports.home = (req, res, next) => {
+  const dataSearch= {};
+  if(req.params.search) { dataSearch = {name: req.params.search}}
   Place.find()
     .then(places => {
       const mapboxPlaces = places.map(place => {       

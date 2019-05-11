@@ -206,7 +206,7 @@ module.exports.details = (req, res, next) => {
         Local.findById(id)
             .populate('comments')
             .populate('favorites')
-            .then(local => {
+            .then(local => { 
                 if (local) {
                     res.render('locals/details', { local, like: Favorite.count()-1 })
                 } else {

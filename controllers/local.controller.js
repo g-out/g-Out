@@ -138,25 +138,19 @@ module.exports.doEdit = (req, res, next) => {
 
 module.exports.doLike = (req, res, next) => {
     const placeID = req.params.id;
-    Local.findById(placeID)
-        .populate('favorites')
-        .then(local=>{
-            res.send(local)
-        })
     const userID = res.locals.session._id;
-    console.log(placeID+' user '+ userID)
 
     const newLike = new Favorite({
-        placeID: placeID,
-        userID: userID
+        place: placeID,
+        user: userID
     })
-    console.log(newLike)
+ 
     newLike.save()
         .then((newLike) => {
-            console.log(newLike.placeID)
-            return Favorite.count({placeID: newLike.placeID})
-                .then(likes => {
-                    res.json({likes});
+      
+            return Favorite.count({place: newLike.place})
+                .then(countlikes => {
+                    res.json({countlikes});
                 })
         })
         .catch(error =>next(error))
@@ -206,7 +200,7 @@ module.exports.details = (req, res, next) => {
             .populate('favorites')
             .then(local => {
                 if (local) {
-                    res.render('locals/details', { local, like: Favorite.count() })
+                    res.render('locals/details', { local, like: Favorite.count()-1 })
                 } else {
                     next(createError(404, 'Local not found'))
                 }

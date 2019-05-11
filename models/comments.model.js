@@ -8,7 +8,7 @@ const commentSchema = new mongoose.Schema({
   user: { type: mongoose.Types.ObjectId, ref: 'User' }, 
   comment: String,
   place: { type: mongoose.Types.ObjectId, ref: 'Place' }
-}, {timestamps: true})
+}, {timestamps: true})  
 
 const Comment = mongoose.model('Comments', commentSchema);
 

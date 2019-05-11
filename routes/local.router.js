@@ -11,6 +11,7 @@ router.post('/', secure.isAuthenticated, local.doCreate);
 router.get('/:id/delete', secure.isAuthenticated, local.delete);
 router.get('/:id/edit', secure.isAuthenticated, local.edit);
 router.post('/:id/like', secure.isAuthenticated, local.doLike);
+//router.post('/:id/dislike', secure.isAuthenticated, local.doDislike);
 router.post('/:id', secure.isAuthenticated, local.doEdit);
 router.get('/:id', secure.isAuthenticated, local.details);
 

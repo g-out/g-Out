@@ -11,12 +11,9 @@
           {{!-- Categoría {{local.category}}<br> --}}
             <p><span class="p-black">Tipo:</span> {{local.localType}}</p>
             </a>
-            <i class="fas fa-heart"></i>
             <div>
-              <button class="btn btn-sm btn-secondary" onclick="onClickLikeLocal(event)"
-                data-local-id="{{local._id}}">
-                {{ localId.likes }} Likes
-              </button>
+              <i class="fas fa-heart black heart" data-local-id="{{local._id}}" onclick="onClickLikeLocal(event)" ></i>
+              <p class="likes">{{like}} likes</p>
             </div>
           </li>
         

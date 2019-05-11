@@ -59,9 +59,15 @@ const placeSchema = new mongoose.Schema({
     required: [true, 'Local type is required'],
     num: process.env.PLACE_TYPE
   } 
-}, { timestamps: true })
+}, { timestamps: true, toJSON: { virtuals: true } })
 
 placeSchema.index({ location: '2dsphere' });
+
+placeSchema.virtual('comments', {
+  ref: 'Comments',
+  localField: '_id',
+  foreignField: 'place'
+})
 
 const Place = mongoose.model('Place', placeSchema);
 module.exports = Place;

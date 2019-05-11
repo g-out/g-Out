@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const Local = require('./../models/place.model')
+const User = require('./../models/user.model')
 const Comment = require('../models/comments.model');
 const Favorite = require('./../models/favorites.model')
 
@@ -156,6 +157,16 @@ module.exports.doLike = (req, res, next) => {
         .catch(error =>next(error))
 }
 
+/* 
+module.exports.doDislike = (req, res, next) => {
+    const placeID = req.params.id;
+    const userID = res.locals.session._id;
+
+    Favorite.findOneAndDelete({user: userID, place: placeID})
+        .then(response => console.log('borrado'))
+        .catch(error =>next(error))
+}    */
+
 module.exports.doCreateComment = (req, res, next) => {
     const newComment = new Comment({
         title: req.body.title,
@@ -186,11 +197,13 @@ module.exports.doCreateComment = (req, res, next) => {
       next(createError(404, 'Local not found'))
     } else {
       Local.findById(id)
+        .populate('comments')
         .then(local => {
+            res.send(local)     
           if (local) {
             Comment.find({ place: local._id })
               .then(comments => {
-                res.render('locals/details', { local, comments })
+                res.render('locals/details', { local, comments, like: Favorite.count() })
               })
               .catch(next)
           } else {

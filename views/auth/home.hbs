@@ -1,11 +1,10 @@
-<div class="input-search  m-3 text-right">
-  <form action="/" method="GET">
+<div class="input-search  m-3 text-center">
+  <form action="/" method="GET" class="input-seart">
     <input type="search" name="search" placeholder="Search it...">
-    <i class="fas fa-search"></i>
   </form>
 </div>
 
-<div class="d-flex justify-content-around">
+<div class="d-flex justify-content-around div-mapa">
 <script>
   var places = {{{mapboxData}}};
 </script>
@@ -16,7 +15,7 @@
 
 <div class='sidebar p-2 bd-highlight'>
     <div class='heading'>
-        <h1>Our locations</h1>
+        <h1 class="h1-locations">Our locations</h1>
     </div>
     <div id='listings' class='listings'></div>
 </div>

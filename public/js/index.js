@@ -13,6 +13,7 @@ function onClickLikeLocal(e) {
       .then((response) => {
         heart.parentNode.querySelector('p').innerText = `${response.data.countlikes} Likes`;
         heart.className = "fas fa-heart red"
+        heart.parentNode.querySelector('p').className = "red"
       })
       .catch(console.log)
   } else {
@@ -20,6 +21,7 @@ function onClickLikeLocal(e) {
       .then((response) => {
         heart.parentNode.querySelector('p').innerText = `${response.data.countlikes} Likes`;        
         heart.className = "fas fa-heart black"
+        heart.parentNode.querySelector('p').className = "black"
       })
       .catch(console.log)
   }

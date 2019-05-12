@@ -1,7 +1,7 @@
- <div class="card mb-3">
+ <div class="card mb-3 ind-card">
 
   <div class="row no-gutters">
-    <div class="col-md-2">
+    <div class="col-md-2 img-card">
       <img src="{{ local.imageThumbs }}" class="card-img" alt="{{ local.name }}">
     </div>
     <div class="col-md-8">
@@ -33,7 +33,7 @@
 {{/if}}
 
 {{!-- {{#if comment.isNew}} --}}
-  <form action="{{local._id}}/comments" method="POST">
+  <form action="{{local._id}}/comments" method="POST" class="form-comment">
 {{!-- {{else}}
   <form action="/local" method="POST">
 {{/if}} --}}
@@ -41,7 +41,7 @@
   <input type="hidden" name="place" value="{{comment.place}}"/>
 
   <div class="form-group">
-    <label>Comment title</label>
+    <label><p class="p-comment">Comment title</p></label>
     <input type="text" class="form-control {{#if errors.title }}is-invalid{{/if}}" name="title" value="{{comment.title}}"
       placeholder="Enter comment title">
 
@@ -53,7 +53,7 @@
   </div>
 
   <div class="form-group">
-    <label>Comment content</label>
+    <label><p class="p-comment">Comment content</p></label>
     <textarea class="form-control {{#if errors.content }}is-invalid{{/if}}"
       name="content">{{comment.comment}} </textarea>
   

@@ -6,15 +6,15 @@
     <form action="/local/{{local._id}}" method="POST">
    {{/if}} 
       <div class="all-form">
-          <label class="custom-file-l" for="nombre">Name</label>
+          <label class="custom-file-l" for="nombre"><p>Name</p></label>
           <input type="text" class="div-input" name="name" value="{{local.name}}">
-          <label class="custom-file-l" for="address">Address</label>
+          <label class="custom-file-l" for="address"><p>Address</p></label>
           <input type="text" class="div-input" name="address" value="{{local.address}}">
-          <label class="custom-file-l" for="phone">Phone</label>
+          <label class="custom-file-l" for="phone"><p>Phone</p></label>
           <input type="number" class="div-input" name="phone" value="{{local.phone}}">
           {{!-- <input type="text" class="cat"> --}}
         <div class="div-localType">
-        <label class="custom-file-l" for="">Category</label>
+        <label class="custom-file-l" for=""><p>Category</p></label>
         <select name="food" id="">
             {{#each foods as |food|}}
             <option value="{{food}}" {{#hasCategory ../local.category.food food}} selected{{/hasCategory}}>{{food}}</option>
@@ -27,7 +27,7 @@
         </select>
         </div>
         <div class="div-localType">
-          <label class="custom-file-l" for="phone">localType</label>
+          <label class="custom-file-l" for="phone"><p>localType</p></label>
           <select name="localType" id="">
             {{#each places as |place|}}
             <option value="{{place}}"{{#hasCategory ../local.localType place}} selected {{/hasCategory}}>{{place}}</option>

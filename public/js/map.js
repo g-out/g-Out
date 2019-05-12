@@ -94,9 +94,9 @@ function buildLocationList(data) {
     link.innerHTML = prop.name;
 
     var details = listing.appendChild(document.createElement('div'));
-    details.innerHTML = '<b>Address: </b>' + prop.address;
-    if (prop.phone) { details.innerHTML += ' · <b>Phone: </b>' + prop.phone }
-    if (prop.description) { details.innerHTML += '<p>' + prop.description + '</p>' }
+    details.innerHTML = '<p class="b-listing">Address: </p>' + prop.address;
+    if (prop.phone) { details.innerHTML += '<p class="b-listing">Phone: </p>' + prop.phone }
+    if (prop.description) { details.innerHTML += '<p class="b-listing">Description: </p>' + prop.description  }
 
     const userLike = prop.favorites.map(favorite => favorite.user)
     let classlike = ''
@@ -132,7 +132,7 @@ function createPopUp(currentFeature) {
     closeOnClick: false
   })
     .setLngLat(currentFeature.geometry.coordinates)
-    .setHTML('<img src="' + currentFeature.properties.image + '"><h3 style="font-size: 22px"><a href="/local/' + currentFeature.properties.placeID + '">' + currentFeature.properties.name + '</a></h3>' +
+    .setHTML('<img src="' + currentFeature.properties.image + '"><a class="a-shortdescrip" href="/local/' + currentFeature.properties.placeID + '">' + currentFeature.properties.name + '</a>' +
       '<span style="color: black">' + currentFeature.properties.address + '</span>')
     .addTo(map);
 }

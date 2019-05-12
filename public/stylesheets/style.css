@@ -116,7 +116,7 @@ label{
   display: block;
 }
 label p{
-  text-align: center;
+  font-weight: bold;
 }
 input{
   width: 100%;

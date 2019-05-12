@@ -5,7 +5,7 @@ const passport = require('passport')
 
 
 module.exports.home = (req, res, next) => {
-  
+
   const criteria = {};
 
   if (req.query.search) {
@@ -15,7 +15,9 @@ module.exports.home = (req, res, next) => {
   Place.find(criteria)
     .populate('favorites')
     .then(places => {
-        const mapboxPlaces = places.sort(p => Math.random() - 0.5).map(place => {       
+      let userLogID = ''
+      if (res.locals.session) { userID = res.locals.session._id }
+      const mapboxPlaces = places.sort(p => Math.random() - 0.5).map(place => {
         return {
           "type": place.localType,
           "geometry": {
@@ -28,10 +30,10 @@ module.exports.home = (req, res, next) => {
             "address": place.address,
             "description": place.shortDescription,
             "image": place.imageThumbs,
-            "category" : place.category,
+            "category": place.category,
             "placeID": place._id,
             "favorites": place.favorites,
-            "userLoginID": res.locals.session._id 
+            "userLoginID": userLogID
           }
         }
       });
@@ -40,10 +42,10 @@ module.exports.home = (req, res, next) => {
         "type": "FeatureCollection",
         "features": mapboxPlaces
       }
-      res.render('auth/home', {places, mapboxData: JSON.stringify(mapboxData)})
+      res.render('auth/home', { places, mapboxData: JSON.stringify(mapboxData) })
     })
     .catch(next)
-  
+
 }
 
 module.exports.register = (req, res, next) => {

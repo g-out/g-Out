@@ -3,6 +3,7 @@
 require('dotenv').config();
 const constants = require('../constants')
 
+const location=  "40.3833013, -3.6724749"
 
 const LOREM_IPSUM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id ligula quis ipsum bibendum laoreet id ut mauris. Duis sollicitudin ac enim eget faucibus. Vestibulum at lacus eu dolor condimentum fermentum. Curabitur suscipit turpis et odio blandit dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rhoncus justo ac sem viverra, nec dignissim nunc lobortis. Ut imperdiet quis ligula eu iaculis. Praesent interdum leo sit amet ultricies semper.'
 const NUM_COMMENTS_MAX = 10
@@ -10,10 +11,11 @@ const NUM_USERS_CREATE = 40
 const NUM_FAVORITES_MAX = 100
 const QUERY_GOOGLE_URI = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
 const QUERY_GOOGLE_DATA = {
-  location: "40.425530, -3.703252",
+  location: location,
   radius: "10000",
   key: process.env.GOOGLE_API_KEY
 };
+
 
 const axios = require('axios');
 const User = require('../models/user.model');

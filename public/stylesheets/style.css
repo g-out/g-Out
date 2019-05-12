@@ -104,6 +104,10 @@ h1 {
   width: 600px;
   margin: 0 auto;
 }
+.form-comment-m{
+  width: 600px;
+  margin: 30px auto 0;
+}
 .p-comment{
   color: #fff;
   margin-bottom: 0;
@@ -124,9 +128,6 @@ input{
 select{
   width: 49%;
 }
-.div-localType{
-  text-align: center;
-}
 .div-formEdit{
   margin: 30px;
 }
@@ -139,6 +140,9 @@ select{
 }
 .p-comment{
   color: #fff;
+}
+.d-flex-m{
+  margin-top: 20px;
 }
 .comentarios{
   width: 600px;

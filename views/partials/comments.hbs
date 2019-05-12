@@ -3,8 +3,8 @@
   <form action="/local" method="POST">
 {{/if}} --}}
 
-  <div class="form-group">
-    <label>Comment title</label>
+  <div class="form-group form-comment-m">
+    <label><p class="p-comment">Comment title</p></label>
     <input type="text" class="form-control {{#if errors.title }}is-invalid{{/if}}" name="title" value="{{comment.title}}"
       placeholder="Enter comment title">
 
@@ -15,8 +15,8 @@
     {{/if}}
   </div>
 
-  <div class="form-group">
-    <label>Comment content</label>
+  <div class="form-group form-comment">
+    <label><p class="p-comment">Comment content</p></label>
       <textarea type="text" class="form-control {{#if errors.content }}is-invalid{{/if}}" name="comment" value="{{comment.comment}}"
       ></textarea>
 
@@ -25,10 +25,10 @@
       {{errors.content}}
     </div>
     {{/if}}
-  </div>
+  
 
-  <div class="d-flex">
+  <div class="d-flex-m">
     <button type="submit" class="btn btn-primary mr-3">Save</button>
     <a class="btn btn-secondary" href="/">Back</a>
   </div>
-</form>
+  </div>

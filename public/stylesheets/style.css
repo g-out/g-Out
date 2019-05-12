@@ -112,6 +112,28 @@ h1 {
   color: #fff;
   font-weight: bold;
 }
+label{
+  display: block;
+}
+label p{
+  text-align: center;
+}
+input{
+  width: 100%;
+}
+select{
+  width: 49%;
+}
+.div-localType{
+  text-align: center;
+}
+.div-formEdit{
+  margin: 30px;
+}
+.boton-create{
+  width: 180px;
+  margin: 50px auto;
+}
 .b-listing {
   margin-bottom: 0;
   color: black;

@@ -134,6 +134,19 @@ select{
   width: 180px;
   margin: 50px auto;
 }
+.h3-comment{
+  color: #fff;
+}
+.p-comment{
+  color: #fff;
+}
+.comentarios{
+  width: 600px;
+  margin: 30px auto;
+  background: #fff;
+  color: #000;
+  padding: 5px;
+}
 .b-listing {
   margin-bottom: 0;
   color: black;

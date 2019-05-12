@@ -71,17 +71,18 @@
 </form>
 
         {{#each local.comments as |comment|}}
-          <h3>{{comment.title}}</h3>
-          <p>{{comment.comment}}</p><hr></hr>
+        <div class="comentarios">
+          <h3 class="h3-c">{{comment.title}}</h3>
+          <p class="p-c">{{comment.comment}}</p><hr></hr>
+        
           <div class="d-flex">
           <a href="{{comment._id}}/editComment" class="btn btn-sm btn-success text-white mr-3">Edit Comment</a>
-
           <form action="{{comment._id}}/deleteComment" method="GET">
             <button type="submit" class="btn btn-danger btn-sm text-white mr-3">
               Delete Comment
             </button>
           </form>
-
+        </div>
         </div>
         {{/each}}
  

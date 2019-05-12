@@ -1,112 +1,60 @@
+body {
+  color: #404040;
+  font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
 
-body{
-    background: url(../img/fondo.jpg) top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin-top: 10px;
-    color: #fff;
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-.lista-lugares{
-  width: 400px;
-  margin: 0 auto;
+
+h1 {
+  font-size: 22px;
+  margin: 0;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 20px 2px;
 }
-.list-group-item:last-child {
-  margin-bottom: 10px;
-}
-.navbar-light .navbar-nav .nav-link {
-  color: rgb(248, 253, 227);
-}
-.sidebar {
-    width: 100%;
-  }
-.bg-light {
-background-color: rgb(116,119,130,0.6) !important;
-}
-.btn-blue{
-  background: rgb(102, 140, 234);
-  color: #fff;
-}
-.map {
-border-left: 1px solid #fff;
-position: absolute;
-left: 33.3333%;
-width: 100vh;
-height: 100vh;
-top: 0;
-bottom: 0;
-}
-.p-black{
-  color: #000;
-}
-.pad2 {
-padding: 20px;
--webkit-box-sizing: border-box;
--moz-box-sizing: border-box;
-box-sizing: border-box;
-}
-.list-group {
-  background: rgb(116,119,130,0.6);
-  padding: 20px;
-}
-.list-group-item {
-  border: 2px solid rgb(194, 68, 74);;
-  width: 400px;
-}
-.list-group-item:hover {
-  background: rgb(194, 68, 74);
-}
-.no-decoration{
+
+a {
+  color: #404040;
   text-decoration: none;
 }
-.div-scroll{
-  max-height:400px;
-  overflow-x: scroll;
-  margin-top:5px;
+
+a:hover {
+  color: #101010;
 }
-.p-add{
-  text-align: center;
-  margin-top: 20px;
-}
-.p-add a{
-  padding: 10px;
-  background: rgb(194, 68, 74);
-  color: #fff;
-}
-.no-decoration {
-  margin-bottom: 0;
-}
-.custom-file-l{
-  display: block;
-  text-align: center;
-  margin: 10px 0 2px;
-}
-.div-input{
-  width: 210px;
-}
-.div-localType{
-  text-align: center;
-}
-.boton-create{
-  margin-top: 20px;
-  width: 110px;
-  margin: 20px auto;
-}
-.all-form{
-  text-align: center;
-}
-.fa-heart:before {
-  content: "\f004";
-  color: black;
-}
-.sidebar {
+
+.sidebar {/* 
   position: absolute;
   width: 33.3333%;
   height: 100%;
   top: 0;
-  left: 0;
+  left: 0; */
+  width: 28%;
+  height: 700px;
   overflow: hidden;
   border-right: 1px solid rgba(0, 0, 0, 0.25);
 }
+
+.pad2 {
+  padding: 20px;
+}
+
+.map {/* 
+  position: relative;
+  left: 30%;
+  width: 100%;
+  top: 50px;
+  bottom: 50px; */
+  width: 68%;
+  height: 700px;
+}
+
 .heading {
   background: #fff;
   border-bottom: 1px solid #eee;
@@ -170,58 +118,6 @@ box-sizing: border-box;
   clear: both;
   visibility: hidden;
 }
-/* Marker tweaks */
-.mapboxgl-popup-close-button {
-  display: none;
-}
-
-.mapboxgl-popup-content {
-  font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
-  padding: 0;
-  width: 180px;
-}
-
-.mapboxgl-popup-content-wrapper {
-  padding: 1%;
-}
-
-.mapboxgl-popup-content h3 {
-  background: #91c949;
-  color: #fff;
-  margin: 0;
-  display: block;
-  padding: 10px;
-  border-radius: 3px 3px 0 0;
-  font-weight: 700;
-  margin-top: -15px;
-}
-
-.mapboxgl-popup-content h4 {
-  margin: 0;
-  display: block;
-  padding: 10px;
-  font-weight: 400;
-}
-
-.mapboxgl-popup-content div {
-  padding: 10px;
-}
-
-.mapboxgl-container .leaflet-marker-icon {
-  cursor: pointer;
-}
-
-.mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
-  margin-top: 15px;
-}
-
-.mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
-  border-bottom-color: #91c949;
-}
-
-.card-body{
-  color: #000;
-}
 
 .markerRestaurant, .markerNight_club, .markerBar, .markerCoffe {
   border: none;
@@ -230,16 +126,15 @@ box-sizing: border-box;
   width: 56px;
   background-color: rgba(0, 0, 0, 0);
 }
-.markerRestaurant {
-  background-image: url('../img/ico_restaurant.png')
-}
-
 .markerNight_club {
   background-image: url('../img/ico_night_club.png')
 }
 
 .markerBar{
   background-image: url('../img/ico_bar.png')
+}
+.markerRestaurant{
+  background-image: url('../img/ico_rest.png')
 }
 
 .markerCoffe{
@@ -249,3 +144,19 @@ box-sizing: border-box;
 .mapboxgl-popup {
   padding-bottom: 50px;
 }
+.black{
+  color: #000;
+}
+.red{
+  color: red;
+}
+.clearfix{
+  clear: both;
+}
+
+.input-search i {
+  font-size: 25px; 
+  color: blue; 
+    font-weight: 900px 
+}
+

@@ -16,7 +16,7 @@ module.exports.home = (req, res, next) => {
     .populate('favorites')
     .then(places => {
       let userLogID = ''
-      if (res.locals.session) { userID = res.locals.session._id }
+      if (res.locals.session) { userLogID = res.locals.session._id }
       const mapboxPlaces = places.sort(p => Math.random() - 0.5).map(place => {
         return {
           "type": place.localType,
@@ -66,7 +66,6 @@ module.exports.doRegister = (req, res, next) => {
     if (user) {
       renderWithErrors({ email: 'Email already registered' })
     } else {
-      // console.log(req.body)
       user = new User(req.body);
       return user.save()
       .then(user => res.redirect('/login'))
@@ -115,7 +114,6 @@ module.exports.loginWithGoogleCallback = (req, res, next) => {
         if (error) {
           next(error)
         } else {
-          // console.log(user)
           res.redirect('/');
         }
       })
@@ -131,7 +129,6 @@ module.exports.loginWithSpotifyCallback = (req, res, next) => {
         if (error) {
           next(error)
         } else {
-          // console.log(user)
           res.redirect('/');
         }
       })
@@ -148,7 +145,6 @@ module.exports.logout = (req, res, next) => {
     res.redirect('/login');
   })
 }
-
 
 module.exports.doProfile = (req, res, next) => {
   if (!req.body.password) {
@@ -174,37 +170,3 @@ module.exports.doProfile = (req, res, next) => {
       }
     });
 }
-
-/*
-
-
-module.exports.doProfile = (req, res, next) => {
-  if (!req.body.password) {
-    delete req.body.password;
-  }
-
-  if (req.file) {
-    req.body.avatarURL = req.file.secure_url;
-  }
-
-  const user = req.user;
-  Object.assign(user, req.body);
-  user.save()
-    .then(user => res.redirect('/profile'))
-    .catch(error => {
-      if (error instanceof mongoose.Error.ValidationError) {
-        res.render('auth/profile', {
-          user: req.body,
-          errors: error.errors
-        })
-      } else {
-        next(error);
-      }
-    });
-}
-
-module.exports.logout = (req, res, next) => {
-  req.logout();
-  res.redirect('/login');
-}
- */

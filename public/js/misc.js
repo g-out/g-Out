@@ -1,21 +1,3 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiZXZhZnJhbmNlcyIsImEiOiJjanY5Z3Fmc3gwb3NmM3ltanphbmhlbjJ2In0.RurxxVNW1-cb21xzVvvdeg';
-
-var map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/outdoors-v11',
-  zoom: 16,
-  pitch: 45,
-  bearing: -17.6,
-});
-
-function positionUser(pos) {
-  positionUser = [pos.coords.longitude, pos.coords.latitude]
-  map.setCenter(positionUser)
-}
-
-navigator.geolocation.getCurrentPosition(pos => positionUser(pos));
-
-map.on('load', mapOptions);
 
 function mapOptions() {
   map.addSource('places', {
@@ -33,7 +15,7 @@ function mapOptions() {
   var marker = new mapboxgl.Marker({
     draggable: true
   })
-    .setLngLat(positionUser)
+    .setLngLat([-3.703252, 40.425530])
     .addTo(map);
 
   function onDragEnd() {
@@ -90,7 +72,7 @@ function buildLocationList(data) {
     listing.id = 'listing-' + i;
 
     listing.innerHTML += '<div class="card-header p-2 "><img src="'+ prop.image +'" alt=""></div>'
-    listing.innerHTML += '<div class="card-text w-100 p-1 mx-2"></div>'
+    listing.innerHTML += '<div class="card-text w-100 mx-2"></div>'
 
     var div = listing.querySelector('.card-text')
     var link = div.appendChild(document.createElement('a'));

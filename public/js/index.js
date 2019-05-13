@@ -4,24 +4,18 @@ function onClickLikeLocal(e) {
   const localId = e.target.dataset.localId;
   const heart = e.target
 
-
-  // e.target.innerText = "Loading...";
-
   if (heart.classList.contains('black')) {
-    console.log('entra')
     axios.post(`/local/${localId}/like`)
       .then((response) => {
-        heart.parentNode.querySelector('p').innerText = `${response.data.countlikes} Likes`;
-        heart.className = "fas fa-heart red"
-        heart.parentNode.querySelector('p').className = "red"
+        heart.parentNode.querySelector('span').innerText = `${response.data.countlikes} Likes`;
+        heart.className = "fas fa-heart w-25 p-1 red"
       })
       .catch(console.log)
   } else {
     axios.post(`/local/${localId}/dislike`)
       .then((response) => {
-        heart.parentNode.querySelector('p').innerText = `${response.data.countlikes} Likes`;        
-        heart.className = "fas fa-heart black"
-        heart.parentNode.querySelector('p').className = "black"
+        heart.parentNode.querySelector('span').innerText = `${response.data.countlikes} Likes`;        
+        heart.className = "fas fa-heart w-25 p-1 black"
       })
       .catch(console.log)
   }

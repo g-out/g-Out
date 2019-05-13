@@ -7,9 +7,7 @@ body {
   background: url(../img/fondo.jpg) no-repeat center 30px;
   background-size: cover;
 }
-p{
 
-}
 a{
   color: #eee;
   text-decoration: none;
@@ -17,6 +15,7 @@ a{
 a:hover {
   color: rgb(45, 125, 246);
 }
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -179,10 +178,10 @@ select{
 
 .listings .item .title small { font-weight: 400; }
 
-.listings .item.active .title,
+.listings .item .active .title,
 .listings .item .title:hover { color: rgb(255, 30, 70) }
 
-.listings .item.active {
+.listings .item .active {
   background-color: #f8f8f8;
 }
 
@@ -220,18 +219,20 @@ select{
   background-color: rgba(0, 0, 0, 0);
 }
 .markerNight_club {
-  background-image: url('../img/ico_night_club.png')
+  background: url(../img/ico1/ico_night_club.png) ; 
+  background-size: 56px;
 }
-
 .markerBar{
-  background-image: url('../img/ico_bar.png')
+  background: url(../img/ico1/ico_bar-min.png) ;
+  background-size: 56px;
 }
 .markerRestaurant{
-  background-image: url('../img/ico_rest.png')
+  background: url(../img/ico1/ico_restaurant.png) ;
+  background-size: 56px;
 }
-
 .markerCoffe{
-  background-image: url('../img/ico_coffe.png')
+  background: url(../img/ico1/ico_cafe.png);
+  background-size: 56px;
 }
 
 .mapboxgl-popup {
@@ -253,3 +254,7 @@ select{
     font-weight: 900px 
 }
 
+
+.card-header img {
+  width: 100px;
+}

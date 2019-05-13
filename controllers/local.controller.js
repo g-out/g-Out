@@ -15,7 +15,8 @@ module.exports.list = (req, res, next) => {
     Local.find()
     .then((arrLocal) => {
         res.render('locals/list', {
-            arrLocales: arrLocal
+            arrLocales: arrLocal,
+            userLogID : res.locals.session._id,
         });
     })
     .catch(next)
@@ -25,7 +26,8 @@ module.exports.create = (req, res, next) => {
     res.render('locals/form', {
         foods: FOOD_TYPE,
         musics: MUSIC_TYPE,
-        places: PLACE_TYPE
+        places: PLACE_TYPE,
+        userLogID : res.locals.session._id,
     })
 }
 module.exports.doCreate = (req, res, next) => {
@@ -51,7 +53,8 @@ module.exports.doCreate = (req, res, next) => {
                 res.render('locals/form',  {
                     foods: FOOD_TYPE,
                     musics: MUSIC_TYPE,
-                    places: PLACE_TYPE
+                    places: PLACE_TYPE,
+                    userLogID : res.locals.session._id,
                 })
             } else {
                 next(error)
@@ -82,7 +85,8 @@ module.exports.edit = (req, res, next) => {
                 foods: FOOD_TYPE,
                 musics: MUSIC_TYPE,
                 places: PLACE_TYPE,
-                local
+                local,
+                userLogID : res.locals.session._id,
             })
         } else {
             next(error)
@@ -112,6 +116,7 @@ module.exports.doEdit = (req, res, next) => {
                 musics: MUSIC_TYPE,
                 places: PLACE_TYPE,
                 local,
+                userLogID : res.locals.session._id,
             ...error
           })
         } else {
@@ -147,7 +152,6 @@ module.exports.doDislike = (req, res, next) => {
 
     Favorite.findOneAndDelete({user: userID, place: placeID})
         .then(response => {
-            res
             console.log('borrado')
             return Favorite.count({place: placeID})
                 .then(countlikes => {
@@ -191,7 +195,10 @@ module.exports.details = (req, res, next) => {
             .populate('favorites')
             .then(local => { 
                 if (local) {
-                    res.render('locals/details', { local, like: Favorite.count()-1 })
+                    res.render('locals/details', { 
+                        local,
+                        userLogID : res.locals.session._id,
+                        like: Favorite.count()-1 })
                 } else {
                     next(createError(404, 'Local not found'))
                 }
@@ -207,7 +214,9 @@ module.exports.details = (req, res, next) => {
      Comment.findById(id)
       .then(comment => {
           if(comment) {
-              res.render('partials/comments', { comment })
+              res.render('partials/comments', { 
+                  comment,
+                  userLogID : res.locals.session._id, })
           } else {
               next(createError(404, 'Comment not found'))
           }
@@ -222,7 +231,7 @@ module.exports.doEditComment = (req, res, next) => {
     Comment.findByIdAndUpdate(id, req.body, {new: true, runValidators: true})
     .then((comment) => {
         if(comment) {
-            res.redirect('/local')
+            res.redirect('/')
         } else{
             next(createError(404, 'Comment not found'))
         }
@@ -231,7 +240,10 @@ module.exports.doEditComment = (req, res, next) => {
         if(error instanceof mongoose.Error.ValidationError)  {
             comment.isNew = false;
 
-            res.render('partials/comments', { comment, ...error })
+            res.render('partials/comments', { 
+                userLogID : res.locals.session._id, 
+                comment,
+                 ...error })
         } else {
             next(error);
         }

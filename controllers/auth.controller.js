@@ -5,7 +5,6 @@ const passport = require('passport')
 
 
 module.exports.home = (req, res, next) => {
-
   const criteria = {};
 
   if (req.query.search) {
@@ -42,7 +41,7 @@ module.exports.home = (req, res, next) => {
         "type": "FeatureCollection",
         "features": mapboxPlaces
       }
-      res.render('auth/home', { places, mapboxData: JSON.stringify(mapboxData) })
+      res.render('auth/home', { places, userLogID, mapboxData: JSON.stringify(mapboxData) })
     })
     .catch(next)
 
@@ -53,14 +52,12 @@ module.exports.register = (req, res, next) => {
 }
 
 module.exports.doRegister = (req, res, next) => {
-  
   function renderWithErrors(errors) {
     res.render('auth/form', {
       user: req.body,
       errors: errors
     })
   }
-
   User.findOne({ email: req.body.email })
   .then(user => {
     if (user) {
@@ -137,7 +134,7 @@ module.exports.loginWithSpotifyCallback = (req, res, next) => {
 }
 
 module.exports.profile = (req, res, next) => {
-  res.render('auth/profile')
+  res.render('auth/profile', { userLogID : res.locals.session._id})
 }
 
 module.exports.logout = (req, res, next) => {
@@ -150,11 +147,9 @@ module.exports.doProfile = (req, res, next) => {
   if (!req.body.password) {
     delete req.body.password;
   }
-
   if (req.file) {
     req.body.avatarURL = req.file.secure_url;
   }
-
   const user = req.user;
   Object.assign(user, req.body);
   user.save()
@@ -163,7 +158,8 @@ module.exports.doProfile = (req, res, next) => {
       if (error instanceof mongoose.Error.ValidationError) {
         res.render('/profile', {
           user: req.body,
-          errors: error.errors
+          errors: error.errors,
+          userLogID : res.locals.session._id,
         })
       } else {
         next(error);

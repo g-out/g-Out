@@ -1,34 +1,29 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container">
-      <a class="navbar-brand" href="/profile">g-Out</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto"></ul>
-        <ul class="navbar-nav my-2 my-lg-0">
-          {{#if session.email}} 
-            <li class="nav-item">
-              <a class="nav-link" href="/profile">{{ session.email }}</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/logout">Logout</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/local">Locals</a>
-            </li>
-            {{else}}
-            <li class="nav-item">
-              <a class="nav-link" href="/register">Register</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/login">Login</a>
-            </li>
-            {{/if}}
+<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top text-white px-4">
+      <span class="navbar-brand">g-Out!</span>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/"><i class="fas fa-home fa-lg"></i> Home</a>
+          </li>
+          {{#if userLogID}}
+          <li class="nav-item">
+            <a class="nav-link" href="/profile"><i class="fas fa-user fa-lg"></i> Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt fa-lg"></i> LoG-out</a>
+          </li>
+          {{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="/register"><i class="fas fa-edit fa-lg"></i> Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login"><i class="fas fa-sign-in-alt fa-lg"></i> LogIn</a>
+          </li>
+          {{/if}}
         </ul>
+        <form class="form-inline my-2 my-md-0" action="/" method="GET">
+        <input class="form-control" type="text" placeholder="Search..." name="search" >
+        <button class="btn btn-info" type="submit"><i class="fas fa-search fa-lg"></i></button>
+        </form>
       </div>
-  </div>
-</nav>
-
+    </nav>

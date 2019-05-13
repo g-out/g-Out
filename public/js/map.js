@@ -109,7 +109,7 @@ function buildLocationList(data) {
 
     var divlikes = details.appendChild(document.createElement('div'));
     divlikes.className = 'd-flex flex-nowrap justify-content-between pt-2'
-    divlikes.innerHTML += '<i class="fas fa-heart heart w-25 p-1 ' + classlike+ '" data-local-id="' + prop.placeID + '" onclick="onClickLikeLocal(event)" ></i>'
+    if(prop.userLoginID) divlikes.innerHTML += '<i class="fas fa-heart heart w-25 p-1 ' + classlike+ '" data-local-id="' + prop.placeID + '" onclick="onClickLikeLocal(event)" ></i>'
     divlikes.innerHTML += '<span class="w-25 text-align-right">' + prop.favorites.length + ' likes</span>'
     divlikes.innerHTML += '</div></div>'
 

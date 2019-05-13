@@ -89,7 +89,7 @@ function buildLocationList(data) {
     listing.className = 'item d-flex flex-nowrap';
     listing.id = 'listing-' + i;
 
-    listing.innerHTML += '<img src="'+ prop.image +'" alt="">'
+    listing.innerHTML += '<div class="card-header p-2 "><img src="'+ prop.image +'" alt=""></div>'
     listing.innerHTML += '<div class="card-text w-100 p-1 mx-2"></div>'
 
     var div = listing.querySelector('.card-text')

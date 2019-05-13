@@ -1,4 +1,4 @@
-<div class="row justify-content-md-center">
+<div class="row justify-content-md-center container-main">
   <div class="col-xs-12 col-sm-12 col-md-4 div-formEdit">
    {{#if local.isNew}}
     <form action="/local" method="POST">
@@ -12,6 +12,10 @@
           <input type="text" class="div-input" name="address" value="{{local.address}}">
           <label class="custom-file-l" for="phone"><p>Phone</p></label>
           <input type="number" class="div-input" name="phone" value="{{local.phone}}">
+          <label class="custom-file-l" for="latitud"><p>Latitude</p></label>
+          <input type="number" class="div-input" name="lat" value="{{local.location.lat}}">
+          <label class="custom-file-l" for="longitud"><p>longitude</p></label>
+          <input type="number" class="div-input" name="lng" value="{{local.location.lng}}">
           {{!-- <input type="text" class="cat"> --}}
         <div class="div-localType">
         <label class="custom-file-l" for=""><p>Category</p></label>

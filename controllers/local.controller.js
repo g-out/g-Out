@@ -40,7 +40,11 @@ module.exports.doCreate = (req, res, next) => {
             music: req.body.music,
         }, 
         userEmail: res.locals.session.email,
-        localType: req.body.localType
+        localType: req.body.localType,
+        location: {
+            lat: req.body.lat,
+            lng: req.body.lng
+        },
     });
 
     newLocal.save()

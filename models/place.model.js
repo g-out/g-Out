@@ -36,7 +36,7 @@ const placeSchema = new mongoose.Schema({
   imageThumbs: {
     type: String,
     required: [true, 'image is required'],
-    //default: '/img/coffe.jpeg'
+    default: '/img/no_photo.jpeg'
   },
   images: [String],
   category: {

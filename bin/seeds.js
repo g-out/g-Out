@@ -65,6 +65,20 @@ function elementAleatory(myArray) {
 
 function createPlaces(datas, type) {
   (datas.filter(data => data.name != undefined)).forEach((data) => {
+    switch (type) {
+      case "bar":
+        data.image = '/img/vino.jpg'
+        break;
+      case "night_club":
+        data.image = '/img/cocktail.jpg'
+        break;
+      case "cafe":
+        data.image = '/img/cafe.jpg'
+        break;
+      case "Restaurant":
+        data.image = '/img/restaurante.jpg'
+        break;
+    }
     let place = new Places({
       name: data.name,
       location : {
@@ -83,11 +97,13 @@ function createPlaces(datas, type) {
         music: elementAleatory(musicsType),
       },
       localType: type,
+      imageThumbs: data.image
     })
     places = [...places, place]
     if (places.length >= placesType.length * 60) createDB()
   })
 }
+
 
 function sleeper(ms) {
   return function(x) {

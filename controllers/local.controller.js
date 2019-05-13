@@ -45,7 +45,7 @@ module.exports.doCreate = (req, res, next) => {
 
     newLocal.save()
         .then((local)=>{
-            res.redirect('/local')
+            res.redirect('/')
             console.log(local)
         })
         .catch(error => { // errrores de validacion
@@ -67,7 +67,7 @@ module.exports.delete = (req, res, next) => {
     Local.findByIdAndDelete(id)
     .then((local)=>{
         if(local){
-            res.redirect('/local')
+            res.redirect('/')
         }else{
             next(createError(404, 'Place not found'))
         }
@@ -101,7 +101,7 @@ module.exports.doEdit = (req, res, next) => {
     Local.findByIdAndUpdate(id, req.body, {new: true, runValidators: true})
     .then ((local) => {
         if(local){
-            res.redirect(`/local/${local._id}`)
+            res.redirect(`/`)
         } else {
             next(createError(404, 'Local not found'))
         }
@@ -171,7 +171,7 @@ module.exports.doCreateComment = (req, res, next) => {
     });
   
     newComment.save()
-      .then((comment) => res.redirect('/local'))
+      .then((comment) => res.redirect('/'))
       .catch((error) => {
         if (error instanceof mongoose.Error.ValidationError) {
           res.render(`/local/${local._id}`, {
@@ -257,7 +257,7 @@ module.exports.deleteComment = (req, res, next) => {
     Comment.findByIdAndDelete(id)
     .then((comment) => {
         if (comment) {
-          res.redirect(`/local`)
+          res.redirect(`/`)
         } else {
           next(createError(404, 'Comment not found'))
         }

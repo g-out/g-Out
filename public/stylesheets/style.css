@@ -56,7 +56,7 @@ h1 {
   color: #fff;
 }
 .div-mapa{
-  padding: 0 60px 60px;
+  padding: 0 60px 100px;
 }
 .map {
   width: 68%;
@@ -105,7 +105,7 @@ h1 {
 }
 .form-comment-m{
   width: 600px;
-  margin: 30px auto 0;
+  margin: 85px auto 0;
 }
 .p-comment{
   color: #fff;
@@ -145,7 +145,7 @@ select{
 }
 .comentarios{
   width: 600px;
-  margin: 30px auto;
+  margin: 30px auto 70px;
   background: #fff;
   color: #000;
   padding: 5px;
@@ -219,20 +219,20 @@ select{
   background-color: rgba(0, 0, 0, 0);
 }
 .markerNight_club {
-  background: url(../img/ico1/ico_night_club.png) ; 
-  background-size: 56px;
+  background: url(../img/ico/cocktail.png) no-repeat center; 
+  background-size: 12px;
 }
 .markerBar{
-  background: url(../img/ico1/ico_bar-min.png) ;
-  background-size: 56px;
+  background: url(../img/ico/wine.png) no-repeat center;
+  background-size: 15px;
 }
 .markerRestaurant{
-  background: url(../img/ico1/ico_restaurant.png) ;
-  background-size: 56px;
+  background: url(../img/ico/restaurant.png) no-repeat center;
+  background-size: 15px;
 }
 .markerCoffe{
-  background: url(../img/ico1/ico_cafe.png);
-  background-size: 56px;
+  background: url(../img/ico/coffee.png) no-repeat center;
+  background-size: 15px;
 }
 
 .mapboxgl-popup {
@@ -268,7 +268,9 @@ select{
   line-height: 60px; 
   background-color: #f5f5f5;
 }
-
+.container{
+  margin-top: 70px;
+}
 .container-main {
   margin-top: 120px;
 }

@@ -7,6 +7,7 @@ const secure = require('../middlewares/secure.mid');
 
 router.get('/', secure.isAuthenticated, local.list);
 router.get('/create', secure.isAuthenticated, local.create);
+//router.get('/createLocal', secure.isAuthenticated, local.docreateLocal);
 router.post('/', secure.isAuthenticated, local.doCreate);
 router.get('/:id/delete', secure.isAuthenticated, local.delete);
 router.get('/:id/edit', secure.isAuthenticated, local.edit);
@@ -23,7 +24,6 @@ router.post('/:id/newComment', comments.doEditComment);
 
 router.get('/:id/deleteComment', comments.deleteComment);
  
-
 
 
 module.exports = router;

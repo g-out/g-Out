@@ -89,7 +89,7 @@ function buildLocationList(data) {
     listing.className = 'item d-flex flex-nowrap';
     listing.id = 'listing-' + i;
 
-    listing.innerHTML += '<div class="card-header p-2 "><img src="'+ prop.image +'" alt=""></div>'
+    listing.innerHTML += '<img src="'+ prop.image +'" alt="">'
     listing.innerHTML += '<div class="card-text w-100 p-1 mx-2"></div>'
 
     var div = listing.querySelector('.card-text')
@@ -100,7 +100,7 @@ function buildLocationList(data) {
     link.innerHTML = prop.name;
 
     var details = div.appendChild(document.createElement('div'));
-    details.innerHTML += '<p class="b-listing">Description: </p>' + prop.description 
+    details.innerHTML += '<p class="b-listing">Description: </p>' + prop.description;
 
     const userLike = prop.favorites.map(favorite => favorite.user)
 
@@ -141,8 +141,8 @@ function createPopUp(currentFeature) {
     closeOnClick: false
   })
     .setLngLat(currentFeature.geometry.coordinates)
-    .setHTML('<img src="' + currentFeature.properties.image + '"><a class="a-shortdescrip" href="/local/' + currentFeature.properties.placeID + '">' + currentFeature.properties.name + '</a>' +
-      '<span style="color: black">' + currentFeature.properties.address + '</span>')
+    .setHTML('<a class="a-shortdescrip" href="/local/' + currentFeature.properties.placeID + '">' + currentFeature.properties.name + '</a>' +
+      '<span style="color: black">' + currentFeature.properties.address + '</span>' + '<br>' + '<span style="color: black">'+ '<span class="b-listing">Phone: </span>' + currentFeature.properties.phone + '</span>')
     .addTo(map);
 }
 

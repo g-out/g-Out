@@ -43,7 +43,9 @@ function createDB() {
   Favorites.create(createFavorites())
     .then((favorites) => console.info(`${favorites.length} new favorites added to the database`))
     .catch(error => console.error(error))
+  //.then(() => mongoose.connection.close());
 }
+
 
 function createUsers() {
   let arrUser = []
